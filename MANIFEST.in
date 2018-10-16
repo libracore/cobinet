@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include cobinet *.css
+recursive-include cobinet *.csv
+recursive-include cobinet *.html
+recursive-include cobinet *.ico
+recursive-include cobinet *.js
+recursive-include cobinet *.json
+recursive-include cobinet *.md
+recursive-include cobinet *.png
+recursive-include cobinet *.py
+recursive-include cobinet *.svg
+recursive-include cobinet *.txt
+recursive-exclude cobinet *.pyc
