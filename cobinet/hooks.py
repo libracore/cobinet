@@ -19,8 +19,8 @@ app_license = "GPL"
 # app_include_js = "/assets/cobinet/js/cobinet.js"
 
 # include js, css files in header of web template
-# web_include_css = "/assets/cobinet/css/cobinet.css"
-# web_include_js = "/assets/cobinet/js/cobinet.js"
+web_include_css = "/assets/cobinet/css/cobinet.css"
+web_include_js = "/assets/cobinet/js/cobinet.js"
 
 # include js in page
 # page_js = {"page" : "public/js/file.js"}
