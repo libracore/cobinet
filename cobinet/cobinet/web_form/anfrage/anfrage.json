@@ -14,11 +14,11 @@
  "docstatus": 0, 
  "doctype": "Web Form", 
  "idx": 0, 
- "introduction_text": "", 
+ "introduction_text": "Bitte Beschreiben Sie Ihre Anfrage und f\u00fcgen eine enstprechende Anlage (z.B. STEP-File, PDF oder Excel-St\u00fcckliste) bei.<br>", 
  "is_standard": 1, 
  "login_required": 1, 
- "max_attachment_size": 0, 
- "modified": "2018-11-15 21:13:28.526064", 
+ "max_attachment_size": 100, 
+ "modified": "2018-11-15 21:49:45.209396", 
  "modified_by": "Administrator", 
  "module": "Cobinet", 
  "name": "anfrage", 
@@ -28,6 +28,7 @@
  "route": "anfrage", 
  "show_sidebar": 1, 
  "sidebar_items": [], 
+ "success_message": "Vielen Dank f\u00fcr Ihre Anfrage.", 
  "success_url": "/anfrage", 
  "title": "Anfrage", 
  "web_form_fields": [
@@ -89,6 +90,28 @@
    "max_length": 0, 
    "max_value": 0, 
    "read_only": 0, 
+   "reqd": 0
+  }, 
+  {
+   "fieldname": "kunde", 
+   "fieldtype": "Link", 
+   "hidden": 0, 
+   "label": "Kunde", 
+   "max_length": 0, 
+   "max_value": 0, 
+   "options": "Customer", 
+   "read_only": 1, 
+   "reqd": 0
+  }, 
+  {
+   "fieldname": "status", 
+   "fieldtype": "Select", 
+   "hidden": 0, 
+   "label": "Status", 
+   "max_length": 0, 
+   "max_value": 0, 
+   "options": "New\nIn progress\nCompleted", 
+   "read_only": 1, 
    "reqd": 0
   }
  ]
