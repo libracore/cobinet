@@ -18,7 +18,7 @@
  "is_standard": 1, 
  "login_required": 1, 
  "max_attachment_size": 100, 
- "modified": "2018-11-15 21:49:45.209396", 
+ "modified": "2018-11-21 15:49:08.785538", 
  "modified_by": "Administrator", 
  "module": "Cobinet", 
  "name": "anfrage", 
@@ -43,10 +43,30 @@
    "reqd": 1
   }, 
   {
-   "fieldname": "anlage", 
+   "fieldname": "step_file", 
    "fieldtype": "Attach", 
    "hidden": 0, 
-   "label": "Anlage", 
+   "label": "STEP-Datei", 
+   "max_length": 0, 
+   "max_value": 0, 
+   "read_only": 0, 
+   "reqd": 0
+  }, 
+  {
+   "fieldname": "stueckliste", 
+   "fieldtype": "Attach", 
+   "hidden": 0, 
+   "label": "St\u00fcckliste", 
+   "max_length": 0, 
+   "max_value": 0, 
+   "read_only": 0, 
+   "reqd": 0
+  }, 
+  {
+   "fieldname": "weitere_anlage", 
+   "fieldtype": "Attach", 
+   "hidden": 0, 
+   "label": "Weitere Anlage", 
    "max_length": 0, 
    "max_value": 0, 
    "read_only": 0, 
@@ -64,7 +84,7 @@
   }, 
   {
    "fieldname": "menge", 
-   "fieldtype": "Data", 
+   "fieldtype": "Int", 
    "hidden": 0, 
    "label": "Menge", 
    "max_length": 0, 
@@ -73,8 +93,18 @@
    "reqd": 0
   }, 
   {
-   "fieldname": "lieferdatum", 
+   "fieldname": "beschreibung_menge", 
    "fieldtype": "Data", 
+   "hidden": 0, 
+   "label": "Beschreibung Menge", 
+   "max_length": 0, 
+   "max_value": 0, 
+   "read_only": 0, 
+   "reqd": 0
+  }, 
+  {
+   "fieldname": "lieferdatum", 
+   "fieldtype": "Date", 
    "hidden": 0, 
    "label": "Lieferdatum", 
    "max_length": 0, 
@@ -84,9 +114,19 @@
   }, 
   {
    "fieldname": "zielpreis", 
-   "fieldtype": "Data", 
+   "fieldtype": "Float", 
    "hidden": 0, 
    "label": "Zielpreis", 
+   "max_length": 0, 
+   "max_value": 0, 
+   "read_only": 0, 
+   "reqd": 0
+  }, 
+  {
+   "fieldname": "beschreibung_preis", 
+   "fieldtype": "Data", 
+   "hidden": 0, 
+   "label": "Beschreibung Preis", 
    "max_length": 0, 
    "max_value": 0, 
    "read_only": 0, 
