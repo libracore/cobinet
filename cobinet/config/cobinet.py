@@ -33,6 +33,12 @@ def get_data():
             "items": [
                    {
                        "type": "doctype",
+                       "name": "Neuanmeldung",
+                       "label": _("Neuanmeldung"),
+                       "description": _("Neuanmeldung")
+                   },
+                   {
+                       "type": "doctype",
                        "name": "Anfrage",
                        "label": _("Anfrage"),
                        "description": _("Anfrage")
