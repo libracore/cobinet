@@ -18,7 +18,7 @@
  "is_standard": 1, 
  "login_required": 1, 
  "max_attachment_size": 100, 
- "modified": "2018-11-21 15:49:08.785538", 
+ "modified": "2018-11-30 21:52:46.207928", 
  "modified_by": "Administrator", 
  "module": "Cobinet", 
  "name": "anfrage", 
@@ -133,13 +133,13 @@
    "reqd": 0
   }, 
   {
-   "fieldname": "kunde", 
-   "fieldtype": "Link", 
+   "fieldname": "kundenname", 
+   "fieldtype": "Data", 
    "hidden": 0, 
-   "label": "Kunde", 
+   "label": "Kundenname", 
    "max_length": 0, 
    "max_value": 0, 
-   "options": "Customer", 
+   "options": "kunde.customer_name", 
    "read_only": 1, 
    "reqd": 0
   }, 
