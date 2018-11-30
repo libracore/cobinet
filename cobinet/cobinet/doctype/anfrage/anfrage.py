@@ -8,9 +8,6 @@ from frappe.model.document import Document
 
 class Anfrage(Document):
     def before_save(this):
-        # make sure the owner is available as mail to field
-        if not this.email_id:
-            this.email_id = this.owner
         # make sure customer field is set
         if not this.kunde:
             # find contact record
