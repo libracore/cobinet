@@ -264,13 +264,26 @@
 
 }
 
+/* small headline */
 .headline {
     color: #002269;
-    font-size: 80px;
-    font-weight: 500;
-    line-height: 80px;
+    font-size: 50px;
+    font-weight: 400;
+    line-height: 50px;
     border-bottom: solid 5px #ff8300;
     margin-bottom: 20px;
+}
+
+/* full-scale headline */
+@media (min-width: 768px) {
+    .headline {
+      color: #002269;
+      font-size: 80px;
+      font-weight: 500;
+      line-height: 80px;
+      border-bottom: solid 5px #ff8300;
+      margin-bottom: 20px;
+    }
 }
 
 .featurette-detailbox {
