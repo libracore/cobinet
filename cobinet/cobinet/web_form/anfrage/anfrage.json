@@ -18,7 +18,7 @@
  "is_standard": 1, 
  "login_required": 1, 
  "max_attachment_size": 100, 
- "modified": "2018-11-30 21:52:46.207928", 
+ "modified": "2019-01-22 19:40:00.210819", 
  "modified_by": "Administrator", 
  "module": "Cobinet", 
  "name": "anfrage", 
@@ -43,32 +43,13 @@
    "reqd": 1
   }, 
   {
-   "fieldname": "step_file", 
-   "fieldtype": "Attach", 
+   "fieldname": "dateien", 
+   "fieldtype": "Table", 
    "hidden": 0, 
-   "label": "STEP-Datei", 
+   "label": "Dateien", 
    "max_length": 0, 
    "max_value": 0, 
-   "read_only": 0, 
-   "reqd": 0
-  }, 
-  {
-   "fieldname": "stueckliste", 
-   "fieldtype": "Attach", 
-   "hidden": 0, 
-   "label": "St\u00fcckliste", 
-   "max_length": 0, 
-   "max_value": 0, 
-   "read_only": 0, 
-   "reqd": 0
-  }, 
-  {
-   "fieldname": "weitere_anlage", 
-   "fieldtype": "Attach", 
-   "hidden": 0, 
-   "label": "Weitere Anlage", 
-   "max_length": 0, 
-   "max_value": 0, 
+   "options": "Anfrage Datei", 
    "read_only": 0, 
    "reqd": 0
   }, 
