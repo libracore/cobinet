@@ -32,18 +32,40 @@ def load_address_to_contact():
 # this function will return suitable suppliers for an item
 @frappe.whitelist()
 def get_suppliers(item_code):
-    sql_query = """SELECT `parent` AS `supplier`
+    sql_query = """SELECT
+                    `tabSupplier`.`name`, `tabSupplier`.`supplier_name`, `tabSupplier Technologie`.`technologie`
                    FROM `tabSupplier Technologie`
+                   LEFT JOIN `tabSupplier` ON `tabSupplier`.`name` = `tabSupplier Technologie`.`parent`
                    WHERE `technologie` IN 
                      /* required technologies */
-                     (SELECT `item_group` 
+                     (SELECT `item_group` AS `technologie`
                        FROM `tabItem` 
                        WHERE `name` = '{item_code}'
                      UNION SELECT `technologie` 
                        FROM `tabSupplier Technologie`
                        WHERE `parenttype` = 'Item'
                          AND `parent` = '{item_code}')
-                   GROUP BY `parent`
-                   HAVING COUNT(DISTINCT `technologie`) >= 2;""".format(item_code=item_code)
+                   GROUP BY `tabSupplier Technologie`.`parent`
+                   HAVING COUNT(DISTINCT `tabSupplier Technologie`.`technologie`) = (
+                     /* number of mandatory attributes */
+                     SELECT COUNT(*) FROM (SELECT `item_group`  AS `technologie`
+                       FROM `tabItem`
+                       WHERE `name` = '{item_code}'
+                     UNION SELECT `technologie`
+                       FROM `tabSupplier Technologie`
+                       WHERE `parenttype` = 'Item'
+                         AND `parent` = '{item_code}') AS `tblCount`);""".format(item_code=item_code)
     supplier_matches = frappe.db.sql(sql_query, as_dict=True)
     return {'suppliers': supplier_matches }
+
+@frappe.whitelist()
+def get_suppliers_by_technology(technology):
+    sql_query = """SELECT
+                     `tabSupplier`.`name`, `tabSupplier`.`supplier_name`, `tabSupplier Technologie`.`technologie`
+                   FROM `tabSupplier Technologie`
+                   LEFT JOIN `tabSupplier` ON `tabSupplier`.`name` = `tabSupplier Technologie`.`parent`
+                   WHERE
+                       `technologie` = '{technology}';""".format(technology=technology)
+    supplier_matches = frappe.db.sql(sql_query, as_dict=True)
+    return {'suppliers': supplier_matches }
+
