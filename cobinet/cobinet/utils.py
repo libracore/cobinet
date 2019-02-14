@@ -29,3 +29,21 @@ def load_address_to_contact():
         except:
             print("Error updating {0}".format(contact))
 
+# this function will return suitable suppliers for an item
+@frappe.whitelist()
+def get_suppliers(item_code):
+    sql_query = """SELECT `parent` AS `supplier`
+                   FROM `tabSupplier Technologie`
+                   WHERE `technologie` IN 
+                     /* required technologies */
+                     (SELECT `item_group` 
+                       FROM `tabItem` 
+                       WHERE `name` = '{item_code}'
+                     UNION SELECT `technologie` 
+                       FROM `tabSupplier Technologie`
+                       WHERE `parenttype` = 'Item'
+                         AND `parent` = '{item_code}')
+                   GROUP BY `parent`
+                   HAVING COUNT(DISTINCT `technologie`) >= 2;""".format(item_code=item_code)
+    supplier_matches = frappe.db.sql(sql_query, as_dict=True)
+    return {'suppliers': supplier_matches }
