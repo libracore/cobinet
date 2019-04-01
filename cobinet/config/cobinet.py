@@ -44,5 +44,17 @@ def get_data():
                        "description": _("Anfrage")
                    }
             ]
+        },
+        {
+            "label": _("Quotations"),
+            "icon": "fa fa-money",
+            "items": [
+                   {
+                       "type": "doctype",
+                       "name": "Preisangebot",
+                       "label": _("Preisangebot"),
+                       "description": _("Preisangebot")
+                   }
+            ]
         }
     ]
