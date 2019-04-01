@@ -4,7 +4,7 @@
  "allow_guest_to_view": 0,
  "allow_import": 1,
  "allow_rename": 0,
- "autoname": "title",
+ "autoname": "field:title",
  "beta": 0,
  "creation": "2019-04-01 09:12:23.012747",
  "custom": 0,
@@ -46,7 +46,7 @@
    "search_index": 0,
    "set_only_once": 0,
    "translatable": 0,
-   "unique": 0
+   "unique": 1
   },
   {
    "allow_bulk_edit": 0,
@@ -591,7 +591,7 @@
  "issingle": 0,
  "istable": 0,
  "max_attachments": 0,
- "modified": "2019-04-01 15:56:49.255350",
+ "modified": "2019-04-01 21:56:34.600000",
  "modified_by": "Administrator",
  "module": "Cobinet",
  "name": "Preisangebot",
