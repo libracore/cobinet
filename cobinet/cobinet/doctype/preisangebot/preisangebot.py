@@ -7,4 +7,8 @@ import frappe
 from frappe.model.document import Document
 
 class Preisangebot(Document):
-	pass
+    def validate(self):
+        
+        return
+        
+
