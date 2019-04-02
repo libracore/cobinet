@@ -107,7 +107,7 @@ function create_line_chart(frm) {
       labels: qtys,
       datasets: [
         {
-          name: __("Indicidual Prices"), 
+          name: __("Individual Prices"), 
           type: 'line',
           values: individual_totals
         },
