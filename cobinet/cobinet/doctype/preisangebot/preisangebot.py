@@ -11,4 +11,16 @@ class Preisangebot(Document):
         
         return
         
-
+    def get_supplier(self, user):
+        # find contact record
+        contact_matches = frappe.get_all("Contact", filters={'user': user}, fields=['name'])
+        if contact_matches:
+            # find linked customer:
+            supplier_matches = frappe.get_all("Dynamic Link", 
+                filters={'parenttype': 'Contact', 'parent': contact_matches[0]['name'], 'link_doctype': 'Supplier'}, 
+                fields=['link_name'])
+            if supplier_matches:
+                supplier = frappe.get_doc("Supplier", supplier_matches[0]['link_name'])
+                self.supplier = supplier.name
+                return { 'supplier': supplier.name, 'supplier_name': supplier.supplier_name }
+        return None

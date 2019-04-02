@@ -8,6 +8,10 @@ frappe.ui.form.on('Preisangebot', {
         frm.add_custom_button(__("Calculate Model"), function() {
             calculate_model(frm);
         });
+        
+        if (!frm.doc.supplier) {
+            get_supplier(frm);
+        }
 	},
     item: function(frm) {
         update_title(frm);
@@ -84,46 +88,48 @@ function create_line_chart(frm) {
     var qtys = [];
     var individual_totals = [];
     var calulated_totals = [];
-    frm.doc.individual_prices.forEach(function(entry) {
-        if (entry.qty != null) {
-            qtys.push(entry.qty);
-            if (entry.total != null) {
-                individual_totals.push(entry.total);
-            } else {
-                individual_totals.push(0);
+    if (frm.doc.individual_prices) {
+        frm.doc.individual_prices.forEach(function(entry) {
+            if (entry.qty != null) {
+                qtys.push(entry.qty);
+                if (entry.total != null) {
+                    individual_totals.push(entry.total);
+                } else {
+                    individual_totals.push(0);
+                }
+                if ((frm.doc.onetime_cost) && (frm.doc.per_unit_cost)) {
+                    calulated_totals.push(frm.doc.onetime_cost + (entry.qty * frm.doc.per_unit_cost));
+                } else {
+                    calulated_totals.push(0);
+                }
             }
-            if ((frm.doc.onetime_cost) && (frm.doc.per_unit_cost)) {
-                calulated_totals.push(frm.doc.onetime_cost + (entry.qty * frm.doc.per_unit_cost));
-            } else {
-                calulated_totals.push(0);
-            }
-        }
-    });
+        });
 
-    // generate chart
-    var parent = document.querySelectorAll('[data-fieldname="price_chart_html"]')[0];
-    let chart = new Chart( parent, {
-    data: {
-      labels: qtys,
-      datasets: [
-        {
-          name: __("Individual Prices"), 
-          type: 'line',
-          values: individual_totals
-        },
-        {
-          name: __("Price Model"), 
-          type: 'line',
-          values: calulated_totals
-        }
-      ]
-    },
+        // generate chart
+        var parent = document.querySelectorAll('[data-fieldname="price_chart_html"]')[0];
+        let chart = new Chart( parent, {
+            data: {
+              labels: qtys,
+              datasets: [
+                {
+                  name: __("Individual Prices"), 
+                  type: 'line',
+                  values: individual_totals
+                },
+                {
+                  name: __("Price Model"), 
+                  type: 'line',
+                  values: calulated_totals
+                }
+              ]
+            },
 
-    title: __("Price Chart"),
-    type: 'axis-mixed', 
-    height: 250,
-    colors: ['#002269', '#ff8300']
-  });
+            title: __("Price Chart"),
+            type: 'axis-mixed', 
+            height: 250,
+            colors: ['#002269', '#ff8300']
+        });
+    }
 }
 
 frappe.ui.form.on('Preisangebot Preis', {
@@ -138,4 +144,15 @@ frappe.ui.form.on('Preisangebot Preis', {
 function calculate_total(frm, cdt, cdn) {
     var child = locals[cdt][cdn];
     frappe.model.set_value(cdt, cdn, 'total', child.qty * child.rate);
+}
+
+function get_supplier(frm) {
+    frappe.call({
+    method: 'get_supplier',
+    args: { 'user': frappe.user.name },
+    doc: frm.doc,
+    callback: function(response) {
+       // frappe.show_alert( __("Done!") );
+    }
+});
 }
