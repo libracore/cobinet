@@ -1,0 +1,11 @@
+DocType: Preisangebot,Individual Prices,Preisstaffelung
+DocType: Preisangebot,Rate per Unit,Preis pro Stück
+DocType: Preisangebot,Price Model,Preismodell
+DocType: Preisangebot,One-time Cost,Einmalkosten
+DocType: Preisangebot,Per-Batch Cost,Kosten pro Los
+DocType: Preisangebot,Per Unit Cost,Kosten pro Stück
+DocType: Preisangebot,External One-time Cost,Allgemeinkosten einmalig
+DocType: Preisangebot,Price Chart,Preisgrafik
+DocType: Preisangebot,Calculate Model,Modell berechnen
+DocType: Preisangebot,Linear price model computed.,Lineares Preismodell berechnet.
+DocType: Preisangebot,No values found.,Keine Werte gefunden.
