@@ -22,9 +22,15 @@
     display: flex;
     align-items: center;
   }
+}
 
+@media (min-width: 1200px) {
   .navbar-brand svg {
     width: 250px;
+  }
+
+  .navbar-brand.ellipsis {
+    max-width: 250px;
   }
 }
 
