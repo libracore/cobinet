@@ -22,5 +22,6 @@ class Preisangebot(Document):
             if supplier_matches:
                 supplier = frappe.get_doc("Supplier", supplier_matches[0]['link_name'])
                 self.supplier = supplier.name
+                self.supplier_name = supplier.supplier_name
                 return { 'supplier': supplier.name, 'supplier_name': supplier.supplier_name }
         return None

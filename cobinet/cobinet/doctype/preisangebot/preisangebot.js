@@ -152,7 +152,7 @@ function get_supplier(frm) {
     args: { 'user': frappe.user.name },
     doc: frm.doc,
     callback: function(response) {
-       // frappe.show_alert( __("Done!") );
+       cur_frm.refresh_field('supplier', 'supplier_name');
     }
 });
 }
