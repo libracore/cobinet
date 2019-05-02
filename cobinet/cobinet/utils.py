@@ -69,3 +69,17 @@ def get_suppliers_by_technology(technology):
     supplier_matches = frappe.db.sql(sql_query, as_dict=True)
     return {'suppliers': supplier_matches }
 
+# this function is to correct an issue with the new data structure of the opportunity in v11.1.24 (customer reference missing)
+def fetch_customer_for_opportunity():
+    opportunities = frappe.get_all("Opportunity", fields=['name', 'customer_name'])
+    for o in opportunities:
+        if o['customer_name']:
+            customer = frappe.get_all("Customer", filters={'customer_name': o['customer_name']}, fields=['name'])
+            if customer:
+                print("Customer: {0}".format(customer[0]['name']))
+                opty = frappe.get_doc("Opportunity", o['name'])
+                opty.party_name = customer[0]['name']
+                opty.save()
+                frappe.db.commit()
+                print("Updated {0}".format(opty.name))
+    return
