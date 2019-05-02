@@ -4,3 +4,4 @@
 *.swp
 tags
 cobinet/docs/current
+__pycache__
