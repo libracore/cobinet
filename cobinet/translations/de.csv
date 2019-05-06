@@ -9,3 +9,6 @@ DocType: Preisangebot,Price Chart,Preisgrafik
 DocType: Preisangebot,Calculate Model,Modell berechnen
 DocType: Preisangebot,Linear price model computed.,Lineares Preismodell berechnet.
 DocType: Preisangebot,No values found.,Keine Werte gefunden.
+DocType: Preisangebot,Minimum QTY,Minimale Menge
+DocType: Preisangebot,Valid until,Gültig bis
+DocType: Preisangebot,Conditions,Konditionen
