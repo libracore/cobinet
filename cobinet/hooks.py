@@ -31,6 +31,9 @@ web_include_js = "/assets/cobinet/js/cobinet.js"
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
 
+# Add fixtures
+fixtures = ["Custom Field"]
+
 # Home Pages
 # ----------
 
