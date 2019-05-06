@@ -32,8 +32,9 @@ def load_address_to_contact():
 # this function will return suitable suppliers for an item
 @frappe.whitelist()
 def get_suppliers(item_code):
-    sql_query = """SELECT
-                    `tabSupplier`.`name`, `tabSupplier`.`supplier_name`, `tabSupplier Technologie`.`technologie`
+    sql_query = """SELECT * FROM (SELECT
+                    `tabSupplier`.`name`, `tabSupplier`.`supplier_name`, `tabSupplier Technologie`.`technologie`,
+                    `tabSupplier`.`cobinet_member`
                    FROM `tabSupplier Technologie`
                    LEFT JOIN `tabSupplier` ON `tabSupplier`.`name` = `tabSupplier Technologie`.`parent`
                    WHERE `technologie` IN 
@@ -54,7 +55,8 @@ def get_suppliers(item_code):
                      UNION SELECT `technologie`
                        FROM `tabSupplier Technologie`
                        WHERE `parenttype` = 'Item'
-                         AND `parent` = '{item_code}') AS `tblCount`);""".format(item_code=item_code)
+                         AND `parent` = '{item_code}') AS `tblCount`)) AS `suppliers`
+                   ORDER BY `suppliers`.`supplier_name` ASC;""".format(item_code=item_code)
     supplier_matches = frappe.db.sql(sql_query, as_dict=True)
     return {'suppliers': supplier_matches }
 
