@@ -85,3 +85,55 @@ def fetch_customer_for_opportunity():
                 frappe.db.commit()
                 print("Updated {0}".format(opty.name))
     return
+
+def get_recursive_items(item_code):
+    #root = frappe.get_doc("BOM", bom_root_item)
+    #print("Name: {0}".format(root.name))
+    #recursive_items = root.get_exploded_items()
+    #recursive_items = root.get_child_exploded_items(root.name, 1)
+    #print("{0}".format(recursive_items))
+    recursive_items = get_child_items(item_code)
+    print("{0}".format(recursive_items))
+    return
+
+@frappe.whitelist()
+def get_child_items(item_code):
+    default_bom = find_default_bom(item_code)
+    children = []
+    if default_bom:
+        # item has a BOM, expand
+        sql_query = """SELECT
+                     `tabBOM Item`.`item_code` AS `item_code`
+                   FROM `tabBOM Item`
+                   WHERE
+                       `parent` = '{bom}'
+                    ORDER BY `idx` ASC;""".format(bom=default_bom)
+        items = frappe.db.sql(sql_query, as_dict=True)
+        # recursively check child items
+        for child in items:
+            # try to expand
+            sub_children = get_child_items(child['item_code'])
+            # if there are sub children, this is a BOM node
+            if sub_children:
+                child['is_bom'] = 1
+            # append child node itself
+            children.append(child)
+            # add sub children (if available)
+            for sub_child in sub_children:
+                children.append(sub_child)
+             
+    return children
+    
+def find_default_bom(item_code):
+    sql_query = """SELECT
+                     `tabBOM`.`name`
+                   FROM `tabBOM`
+                   WHERE
+                       `docstatus` = 1 
+                       AND `is_default` = 1
+                       AND `item` = '{item}';""".format(item=item_code)
+    try:
+        default_bom = frappe.db.sql(sql_query, as_dict=True)[0]['name']
+    except:
+        default_bom = None
+    return default_bom
