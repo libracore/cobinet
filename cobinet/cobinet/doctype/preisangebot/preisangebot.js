@@ -12,19 +12,38 @@ frappe.ui.form.on('Preisangebot', {
         if (!frm.doc.supplier) {
             get_supplier(frm);
         }
+        
+        frm.add_custom_button(__("Test"), function() {
+            update_title(frm);
+        });
 	},
     item: function(frm) {
         update_title(frm);
     },
     supplier: function(frm) {
         update_title(frm);
+    },
+    before_save: function(frm) {
+        update_title(frm);
     }
 });
 
 function update_title(frm) {
     if ((frm.doc.item) && (frm.doc.supplier)) {
-        cur_frm.set_value('title', frm.doc.item + " - " + frm.doc.supplier);
+        var title = frm.doc.item + " - " + frm.doc.supplier;
+        
+        // add revision index if required
+        if (frm.doc.amended_from) {
+            if (frm.doc.amended_from == title) {
+                title += "-1";
+            } else {
+                var rev = parseInt(frm.doc.amended_from.substring(title.length + 1)) + 1;
+                title += "-" + (rev);
+            }
+        }        
+        cur_frm.set_value('title', title);
     }
+
 }
 
 function calculate_model(frm) {

@@ -94,8 +94,51 @@ def get_recursive_items(item_code):
     #print("{0}".format(recursive_items))
     recursive_items = get_child_items(item_code)
     print("{0}".format(recursive_items))
-    return
+    return recursive_items
 
+"""
+    This function will check the offers for each BOM item recursively
+    -item_code: item code for the base item
+    -qty: number of units
+"""
+@frappe.whitelist()
+def get_child_items_with_offer(item_code, qty):
+    default_bom = find_default_bom(item_code)
+    return get_child_items_with_offer_from_bom(default_bom, qty)
+    
+def get_child_items_with_offer_from_bom(bom_no, qty):
+    children = []
+    if default_bom:
+        # item has a BOM, expand
+        sql_query = """SELECT
+                     `tabBOM Item`.`item_code` AS `item_code`,
+                     `tabBOM Item`.`qty` AS `qty`,
+                     `tabBOM Item`.`bom_no` AS `bom_no`
+                   FROM `tabBOM Item`
+                   WHERE
+                       `parent` = '{bom}'
+                   ORDER BY `idx` ASC;""".format(bom=default_bom)
+        items = frappe.db.sql(sql_query, as_dict=True)
+        # recursively check child items
+        for child in items:
+            # try to expand
+            if 'bom_no' in child:
+                sub_children = get_child_items_with_offer_from_bom(child['bom_no'], qty)
+            else:
+                sub_children = []
+            # append child node itself
+            children.append(child)
+            # add sub children (if available)
+            for sub_child in sub_children:
+                sub_child['parent'] = child['item_code']
+                children.append(sub_child)
+    print("{0}".format(children))
+    return children
+        
+    
+"""
+    This function will return a list of all items (recursively through the BOM) of an item
+"""
 @frappe.whitelist()
 def get_child_items(item_code):
     default_bom = find_default_bom(item_code)
@@ -120,8 +163,7 @@ def get_child_items(item_code):
             children.append(child)
             # add sub children (if available)
             for sub_child in sub_children:
-                children.append(sub_child)
-             
+                children.append(sub_child)             
     return children
     
 def find_default_bom(item_code):
@@ -137,3 +179,28 @@ def find_default_bom(item_code):
     except:
         default_bom = None
     return default_bom
+
+""" 
+    This function will return the best offer for an item
+"""
+def get_best_offer(item_code, qty):
+    # get valid prices for this item/qty, first is cheapest offer
+    qty = float(qty)
+    sql_query = """SELECT
+                 (`tabPreisangebot`.`onetime_cost` 
+                  + `tabPreisangebot`.`external_onetime_cost`
+                  + `tabPreisangebot`.`perbatch_cost`
+                  + {qty} * `tabPreisangebot`.`per_unit_cost`) AS `cost`
+               FROM `tabPreisangebot`
+               WHERE
+                   `docstatus` = 1
+                   AND (`valid_until` IS NULL OR `valid_until` >= CURDATE())
+                   AND `item` = '{item}'
+                   AND {qty} >= `minimum_qty`
+               ORDER BY `cost` ASC
+               LIMIT 1;""".format(item=item_code, qty=qty)
+    try:
+        best_offer = frappe.db.sql(sql_query, as_dict=True)[0]['cost']
+    except:
+        best_offer = None
+    return best_offer
