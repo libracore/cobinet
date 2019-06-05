@@ -104,35 +104,49 @@ def get_recursive_items(item_code):
 @frappe.whitelist()
 def get_child_items_with_offer(item_code, qty):
     default_bom = find_default_bom(item_code)
-    return get_child_items_with_offer_from_bom(default_bom, qty)
-    
-def get_child_items_with_offer_from_bom(bom_no, qty):
-    children = []
     if default_bom:
-        # item has a BOM, expand
-        sql_query = """SELECT
-                     `tabBOM Item`.`item_code` AS `item_code`,
-                     `tabBOM Item`.`qty` AS `qty`,
-                     `tabBOM Item`.`bom_no` AS `bom_no`
-                   FROM `tabBOM Item`
-                   WHERE
-                       `parent` = '{bom}'
-                   ORDER BY `idx` ASC;""".format(bom=default_bom)
-        items = frappe.db.sql(sql_query, as_dict=True)
-        # recursively check child items
-        for child in items:
-            # try to expand
-            if 'bom_no' in child:
-                sub_children = get_child_items_with_offer_from_bom(child['bom_no'], qty)
-            else:
-                sub_children = []
-            # append child node itself
-            children.append(child)
-            # add sub children (if available)
-            for sub_child in sub_children:
-                sub_child['parent'] = child['item_code']
-                children.append(sub_child)
-    print("{0}".format(children))
+        children = get_child_items_with_offer_from_bom(item_code, default_bom, qty)
+    else:
+        children = None
+    return children
+    
+def get_child_items_with_offer_from_bom(item_code, bom_no, qty):
+    children = []
+    # find BOM items with qty and sub-BOMs
+    sql_query = """SELECT
+                 `tabBOM Item`.`item_code` AS `item_code`,
+                 `tabBOM Item`.`qty` AS `qty`,
+                 IFNULL(`tabBOM Item`.`bom_no`, '') AS `bom_no`
+               FROM `tabBOM Item`
+               WHERE
+                   `parent` = '{bom}'
+               ORDER BY `idx` ASC;""".format(bom=bom_no)
+    items = frappe.db.sql(sql_query, as_dict=True)
+    # recursively check child items
+    for child in items:
+        # try to expand
+        if child['bom_no'] != "":
+            sub_children = get_child_items_with_offer_from_bom(child['item_code'], child['bom_no'], qty)
+        else:
+            sub_children = []
+        # append child node itself
+        child['parent'] = item_code
+        children.append(child)
+        # add sub children (if available)
+        for sub_child in sub_children:
+            sub_child['parent'] = child['item_code']
+            children.append(sub_child)
+    # compute best rates (backwards)
+    for child in children[::-1]:
+        if child['bom_no'] == "":
+            child['rate'] = get_best_offer(child['item_code'], child['qty'])
+        else:
+            # compute BOM rate from children
+            bom_rate = 0.0
+            for bom_child in children:
+                if bom_child['parent'] == child['item_code']:
+                    bom_rate += bom_child['rate'] * bom_child['qty']
+            child['rate'] = bom_rate
     return children
         
     
@@ -202,5 +216,5 @@ def get_best_offer(item_code, qty):
     try:
         best_offer = frappe.db.sql(sql_query, as_dict=True)[0]['cost']
     except:
-        best_offer = None
+        best_offer = 0
     return best_offer
