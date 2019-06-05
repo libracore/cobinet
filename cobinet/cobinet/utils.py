@@ -139,13 +139,13 @@ def get_child_items_with_offer_from_bom(item_code, bom_no, qty):
     # compute best rates (backwards)
     for child in children[::-1]:
         if child['bom_no'] == "":
-            child['rate'] = get_best_offer(child['item_code'], child['qty'])
+            child['offer'] = get_best_offer(child['item_code'], child['qty'])
         else:
             # compute BOM rate from children
             bom_rate = 0.0
             for bom_child in children:
                 if bom_child['parent'] == child['item_code']:
-                    bom_rate += bom_child['rate'] * bom_child['qty']
+                    bom_rate += bom_child['offer']['rate'] * bom_child['qty']
             child['rate'] = bom_rate
     return children
         
@@ -204,17 +204,20 @@ def get_best_offer(item_code, qty):
                  (`tabPreisangebot`.`onetime_cost` 
                   + `tabPreisangebot`.`external_onetime_cost`
                   + `tabPreisangebot`.`perbatch_cost`
-                  + {qty} * `tabPreisangebot`.`per_unit_cost`) AS `cost`
+                  + {qty} * `tabPreisangebot`.`per_unit_cost`) AS `rate`,
+                 `tabPreisangebot`.`supplier` AS `supplier`,
+                 `tabPreisangebot`.`supplier_name` AS `supplier_name`,
+                 `tabPreisangebot`.`name` AS `reference`
                FROM `tabPreisangebot`
                WHERE
                    `docstatus` = 1
                    AND (`valid_until` IS NULL OR `valid_until` >= CURDATE())
                    AND `item` = '{item}'
                    AND {qty} >= `minimum_qty`
-               ORDER BY `cost` ASC
+               ORDER BY `rate` ASC
                LIMIT 1;""".format(item=item_code, qty=qty)
     try:
-        best_offer = frappe.db.sql(sql_query, as_dict=True)[0]['cost']
+        best_offer = frappe.db.sql(sql_query, as_dict=True)[0]
     except:
-        best_offer = 0
+        best_offer = {'rate': 0, 'supplier': None, 'supplier_name': None, 'reference': None}
     return best_offer
