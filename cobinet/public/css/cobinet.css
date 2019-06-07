@@ -228,7 +228,7 @@
 
 .featurette {
     padding: 20px;
-    margin-bottom: 50px;
+    /* margin-bottom: 50px; */
 }
 
 .featurette.center {
@@ -571,7 +571,7 @@
 }
 
 .card-body {
-    height: 200px;
+    height: 150px;
 }
 
 .card-text {
