@@ -208,16 +208,18 @@ def get_best_offer(item_code, qty):
                  `tabPreisangebot`.`supplier` AS `supplier`,
                  `tabPreisangebot`.`supplier_name` AS `supplier_name`,
                  `tabPreisangebot`.`name` AS `reference`
+                 `tabPreisangebot`.`conditions` AS `conditions`
                FROM `tabPreisangebot`
                WHERE
                    `docstatus` = 1
                    AND (`valid_until` IS NULL OR `valid_until` >= CURDATE())
                    AND `item` = '{item}'
                    AND {qty} >= `minimum_qty`
+                   AND `ignore` = 0
                ORDER BY `rate` ASC
                LIMIT 1;""".format(item=item_code, qty=qty)
     try:
         best_offer = frappe.db.sql(sql_query, as_dict=True)[0]
     except:
-        best_offer = {'rate': 0, 'supplier': None, 'supplier_name': None, 'reference': None}
+        best_offer = {'rate': 0, 'supplier': None, 'supplier_name': None, 'reference': None, 'conditions': None}
     return best_offer
