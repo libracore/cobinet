@@ -105,7 +105,8 @@ def get_recursive_items(item_code):
 def get_child_items_with_offer(item_code, qty):
     default_bom = find_default_bom(item_code)
     if default_bom:
-        children = get_child_items_with_offer_from_bom(item_code, default_bom, qty)
+        # children = get_child_items_with_offer_from_bom(item_code, default_bom, qty)
+        children = build_bom_list_with_offer(item_code, default_bom, qty)
     else:
         children = None
     return children
@@ -138,18 +139,82 @@ def get_child_items_with_offer_from_bom(item_code, bom_no, qty):
             children.append(sub_child)
     # compute best rates (backwards)
     for child in children[::-1]:
-        if child['bom_no'] == "":
-            child['offer'] = get_best_offer(child['item_code'], child['qty'])
-        else:
-            # compute BOM rate from children
-            bom_rate = 0.0
+        child['offer'] = get_best_offer(child['item_code'], (float(qty) * float(child['qty'])))
+        # compensate rate to be per unit
+        child['offer']['rate'] = float(child['offer']['rate']) / float(qty)
+        if child['bom_no'] != "":
+            # compute BOM rate from children (include BOM assembly cost if available)
+            if child['offer']['rate']:
+                bom_rate = child['offer']['rate']
+            else:
+                bom_rate = 0.0
             for bom_child in children:
                 if bom_child['parent'] == child['item_code']:
                     bom_rate += bom_child['offer']['rate'] * bom_child['qty']
             child['rate'] = bom_rate
+       
+    return children
+
+def build_bom_list_with_offer(item_code, bom_no, qty):
+    consolidated_bom_items = build_bom_item_list(item_code, bom_no, qty)
+    # add offer for each item
+    for item in consolidated_bom_items:
+        item['offer'] = get_best_offer(item['item_code'], (float(qty) * float(item['qty'])))
+        # compensate rate to be per unit
+        item['offer']['rate'] = float(item['offer']['rate']) / float(qty)
+    return consolidated_bom_items
+"""
+This function build an item list with quantity per item
+"""
+def build_bom_item_list(item_code, bom_no, qty):
+    item_list = recursive_get_bom_item_list(item_code, bom_no, qty)
+    # consolidate list: filter out duplicates
+    unique_items = []
+    for item in item_list:
+        if item['item_code'] not in unique_items:
+            unique_items.append(item['item_code'])
+    consolidated_children = []
+    for item in unique_items:
+        consolidated_item = {
+            'qty': 0,
+            'item_code': item
+        }
+        for child in item_list:
+            if child['item_code'] == item:
+                consolidated_item['bom_no'] = child['bom_no']
+                consolidated_item['qty'] = consolidated_item['qty'] + child['qty']
+        consolidated_children.append(consolidated_item)
+    return consolidated_children
+        
+def recursive_get_bom_item_list(item_code, bom_no, qty, multiplier=1):
+    children = []
+    # find BOM items with qty and sub-BOMs
+    sql_query = """SELECT
+                 `tabBOM Item`.`item_code` AS `item_code`,
+                 ({multiplier} * `tabBOM Item`.`qty`) AS `qty`,
+                 IFNULL(`tabBOM Item`.`bom_no`, '') AS `bom_no`
+               FROM `tabBOM Item`
+               WHERE
+                   `parent` = '{bom}'
+               ORDER BY `idx` ASC;""".format(bom=bom_no, multiplier=multiplier)
+    items = frappe.db.sql(sql_query, as_dict=True)
+    # build BOM item list
+    for child in items:
+        # try to expand
+        if child['bom_no'] != "":
+            sub_children = recursive_get_bom_item_list(
+                child['item_code'], child['bom_no'], qty, child['qty'] * multiplier)
+        else:
+            sub_children = []     
+        # append child node itself
+        child['parent'] = item_code
+        children.append(child)
+        # add sub children (if available)
+        for sub_child in sub_children:
+            sub_child['parent'] = child['item_code']
+            children.append(sub_child) 
     return children
         
-    
 """
     This function will return a list of all items (recursively through the BOM) of an item
 """
@@ -207,8 +272,16 @@ def get_best_offer(item_code, qty):
                   + {qty} * `tabPreisangebot`.`per_unit_cost`) AS `rate`,
                  `tabPreisangebot`.`supplier` AS `supplier`,
                  `tabPreisangebot`.`supplier_name` AS `supplier_name`,
-                 `tabPreisangebot`.`name` AS `reference`
-                 `tabPreisangebot`.`conditions` AS `conditions`
+                 `tabPreisangebot`.`name` AS `reference`,
+                 `tabPreisangebot`.`conditions` AS `conditions`,
+                 (SELECT COUNT(`name`) FROM `tabPreisangebot`                
+                  WHERE
+                    `docstatus` = 1
+                    AND (`valid_until` IS NULL OR `valid_until` >= CURDATE())
+                    AND `item` = '{item}'
+                    AND {qty} >= `minimum_qty`
+                    AND `ignore` = 0) AS `count`,
+                 {qty} AS `qty`
                FROM `tabPreisangebot`
                WHERE
                    `docstatus` = 1
@@ -220,6 +293,6 @@ def get_best_offer(item_code, qty):
                LIMIT 1;""".format(item=item_code, qty=qty)
     try:
         best_offer = frappe.db.sql(sql_query, as_dict=True)[0]
-    except:
-        best_offer = {'rate': 0, 'supplier': None, 'supplier_name': None, 'reference': None, 'conditions': None}
+    except Exception as e:
+        best_offer = {'rate': 0, 'supplier': None, 'supplier_name': None, 'reference': None, 'conditions': None, 'error': e}
     return best_offer

@@ -25,3 +25,16 @@ class Preisangebot(Document):
                 self.supplier_name = supplier.supplier_name
                 return { 'supplier': supplier.name, 'supplier_name': supplier.supplier_name }
         return None
+
+"""
+ This function is to ignore a proposed price quote, e.g. from the quotation view
+"""
+@frappe.whitelist()
+def ignore_offer(offer_name):
+    preisangebot = frappe.get_doc("Preisangebot", offer_name)
+    try:
+        preisangebot.ignore = 1
+        preisangebot.save()
+        return True
+    except:
+        return False
