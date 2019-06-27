@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
-# Copyright (c) 2018, libracore and contributors
+# Copyright (c) 2018-2019, libracore and contributors
 # For license information, please see license.txt
 
 from __future__ import unicode_literals
 import frappe
 from frappe.model.document import Document
+import datetime
 
 class Anfrage(Document):
     def before_save(self):
@@ -19,6 +20,9 @@ class Anfrage(Document):
                     customer = frappe.get_doc("Customer", customer_matches[0]['link_name'])
                     self.kunde = customer.name
                     self.kundenname = customer.customer_name
+        # set default min quotation validity date
+        if not self.quotation_min_validity_date:
+            self.quotation_min_validity_date = datetime.date.today() + datetime.timedelta(days=90)
         return
         
     def after_insert(self):

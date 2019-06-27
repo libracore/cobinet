@@ -12,3 +12,4 @@ DocType: Preisangebot,No values found.,Keine Werte gefunden.
 DocType: Preisangebot,Minimum QTY,Minimale Menge
 DocType: Preisangebot,Valid until,Gültig bis
 DocType: Preisangebot,Conditions,Konditionen
+DocType: Preisangebot,Please make sure that the offer is valid at least until {0}.,"Bitte stellen Sie sicher, dass das Angebot mindestens bis am {0} gültig ist."
