@@ -16,6 +16,13 @@ frappe.ui.form.on('Preisangebot', {
         frm.add_custom_button(__("Test"), function() {
             update_title(frm);
         });
+        
+        // set default validity if empty
+        if (!frm.doc.valid_until) {
+            var valid_until = new Date();
+            valid_until.setDate(valid_until.getDate() + 90);
+            cur_frm.set_value('valid_until', valid_until);
+        }
 	},
     item: function(frm) {
         update_title(frm);
