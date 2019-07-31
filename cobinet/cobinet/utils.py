@@ -274,6 +274,7 @@ def get_best_offer(item_code, qty):
                  `tabPreisangebot`.`supplier_name` AS `supplier_name`,
                  `tabPreisangebot`.`name` AS `reference`,
                  `tabPreisangebot`.`conditions` AS `conditions`,
+                 `tabPreisangebot`.`valid_until` AS `valid_until`,
                  (SELECT COUNT(`name`) FROM `tabPreisangebot`                
                   WHERE
                     `docstatus` = 1
@@ -294,5 +295,5 @@ def get_best_offer(item_code, qty):
     try:
         best_offer = frappe.db.sql(sql_query, as_dict=True)[0]
     except Exception as e:
-        best_offer = {'rate': 0, 'supplier': None, 'supplier_name': None, 'reference': None, 'conditions': None, 'error': e}
+        best_offer = {'rate': 0, 'supplier': None, 'supplier_name': None, 'reference': None, 'conditions': None, 'error': e, 'valid_until': '2000-01-01'}
     return best_offer
