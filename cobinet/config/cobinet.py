@@ -80,5 +80,35 @@ def get_data():
                        "description": _("Supplier Quotation")
                    }
             ]
+        },
+        {
+            "label": _("Marketing"),
+            "icon": "fa fa-money",
+            "items": [
+                   {
+                       "type": "doctype",
+                       "name": "Web Page",
+                       "label": _("Web Page"),
+                       "description": _("Web Page")
+                   },
+                   {
+                       "type": "doctype",
+                       "name": "Newsletter",
+                       "label": _("Newsletter"),
+                       "description": _("Newsletter")
+                   },
+                   {
+                       "type": "doctype",
+                       "name": "File",
+                       "label": _("File"),
+                       "description": _("File")
+                   },
+                   {
+                       "type": "doctype",
+                       "name": "Website Settings",
+                       "label": _("Website Settings"),
+                       "description": _("Website Settings")
+                   }
+            ]
         }
     ]
