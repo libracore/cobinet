@@ -15,6 +15,12 @@ def get_data():
                 },
                 {
                     "type": "doctype",
+                    "name": "Contact",
+                    "label": _("Contact"),
+                    "description": _("Contact")
+                },
+                {
+                    "type": "doctype",
                     "name": "Opportunity",
                     "label": _("Opportunity"),
                     "description": _("Opportunity")
@@ -24,6 +30,12 @@ def get_data():
                     "name": "Quotation",
                     "label": _("Quotation"),
                     "description": _("Quotation")
+                },
+                {
+                    "type": "doctype",
+                    "name": "Item",
+                    "label": _("Item"),
+                    "description": _("Item")
                 }
             ]
         },
@@ -54,6 +66,18 @@ def get_data():
                        "name": "Preisangebot",
                        "label": _("Preisangebot"),
                        "description": _("Preisangebot")
+                   },
+                   {
+                       "type": "doctype",
+                       "name": "Quotation",
+                       "label": _("Quotation"),
+                       "description": _("Quotation")
+                   },
+                   {
+                       "type": "doctype",
+                       "name": "Supplier Quotation",
+                       "label": _("Supplier Quotation"),
+                       "description": _("Supplier Quotation")
                    }
             ]
         }
