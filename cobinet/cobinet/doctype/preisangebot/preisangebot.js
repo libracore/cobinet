@@ -2,7 +2,7 @@
 // For license information, please see license.txt
 
 frappe.ui.form.on('Preisangebot', {
-	refresh: function(frm) {
+    refresh: function(frm) {
         create_line_chart(frm);
         
         frm.add_custom_button(__("Calculate Model"), function() {
@@ -18,12 +18,8 @@ frappe.ui.form.on('Preisangebot', {
         });
         
         // set default validity if empty
-        if (!frm.doc.valid_until) {
-            var valid_until = new Date();
-            valid_until.setDate(valid_until.getDate() + 90);
-            cur_frm.set_value('valid_until', valid_until);
-        }
-	},
+        set_default_expiration(frm);
+    },
     item: function(frm) {
         update_title(frm);
     },
@@ -31,9 +27,19 @@ frappe.ui.form.on('Preisangebot', {
         update_title(frm);
     },
     before_save: function(frm) {
+        set_default_expiration(frm);
         update_title(frm);
     }
 });
+
+function set_default_expiration(frm) {
+    if (!frm.doc.valid_until) {
+        var valid_until = new Date();
+        valid_until.setDate(valid_until.getDate() + 90);
+        var valid_date = valid_until.getFullYear() + "-" + (valid_until.getMonth() + 1) + "-" + valid_until.getDate();
+        cur_frm.set_value('valid_until', valid_date);
+    }    
+}
 
 function update_title(frm) {
     if ((frm.doc.item) && (frm.doc.supplier)) {
@@ -133,7 +139,7 @@ function create_line_chart(frm) {
 
         // generate chart
         var parent = document.querySelectorAll('[data-fieldname="price_chart_html"]')[0];
-        let chart = new Chart( parent, {
+        let chart = new frappe.Chart( parent, {
             data: {
               labels: qtys,
               datasets: [
@@ -159,9 +165,9 @@ function create_line_chart(frm) {
 }
 
 frappe.ui.form.on('Preisangebot Preis', {
-	qty: function(frm, cdt, cdn) {
+    qty: function(frm, cdt, cdn) {
         calculate_total(frm, cdt, cdn);
-	},
+    },
     rate: function(frm, cdt, cdn) {
         calculate_total(frm, cdt, cdn);
     }
