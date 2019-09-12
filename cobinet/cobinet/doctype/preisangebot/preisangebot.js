@@ -29,6 +29,7 @@ frappe.ui.form.on('Preisangebot', {
     before_save: function(frm) {
         set_default_expiration(frm);
         update_title(frm);
+        cur_frm.set_value("conditions_review", frm.doc.conditions); // update review conditions
     }
 });
 

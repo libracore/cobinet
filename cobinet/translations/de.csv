@@ -15,3 +15,4 @@ DocType: Preisangebot,Conditions,Konditionen
 DocType: Preisangebot,Please make sure that the offer is valid at least until {0}.,"Bitte stellen Sie sicher, dass das Angebot mindestens bis am {0} gültig ist."
 DocType: Preisangebot,Term of delivery (days),Lieferfrist (Tage)
 DocType: Preisangebot,Standard Conditions,Standardkonditionen
+DocType: Preisangebot,Conditions review,Konditionen (Freigabe)
