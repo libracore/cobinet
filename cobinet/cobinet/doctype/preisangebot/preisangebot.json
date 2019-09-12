@@ -8,6 +8,7 @@
  "field_order": [
   "title",
   "item",
+  "item_code",
   "item_name",
   "target_price",
   "column_main",
@@ -216,10 +217,18 @@
    "fieldtype": "Data",
    "label": "Conditions review",
    "permlevel": 1
+  },
+  {
+   "fetch_from": "item.item_code",
+   "fieldname": "item_code",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Item code",
+   "options": "item.item_code"
   }
  ],
  "is_submittable": 1,
- "modified": "2019-09-12 21:50:56.036590",
+ "modified": "2019-09-12 22:16:59.973481",
  "modified_by": "lars.mueller@libracore.com",
  "module": "Cobinet",
  "name": "Preisangebot",
