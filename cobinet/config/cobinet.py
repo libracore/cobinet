@@ -78,6 +78,12 @@ def get_data():
                        "name": "Supplier Quotation",
                        "label": _("Supplier Quotation"),
                        "description": _("Supplier Quotation")
+                   },
+                   {
+                       "type": "doctype",
+                       "name": "Supplier",
+                       "label": _("Supplier"),
+                       "description": _("Supplier")
                    }
             ]
         },

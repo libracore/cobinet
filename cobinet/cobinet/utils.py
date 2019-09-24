@@ -60,6 +60,48 @@ def get_suppliers(item_code):
     supplier_matches = frappe.db.sql(sql_query, as_dict=True)
     return {'suppliers': supplier_matches }
 
+# this function will return all suitable supplier contacts (users) for an item
+@frappe.whitelist()
+def get_supplier_contacts(item_code):
+    sql_query = """SELECT 
+                     `suppliers`.`name`, 
+                     `suppliers`.`supplier_name`, 
+                     `suppliers`.`technologie`, 
+                     `suppliers`.`cobinet_member`, 
+                     `contacts`.`user` 
+                   FROM (SELECT
+                     `tabSupplier`.`name`, 
+                     `tabSupplier`.`supplier_name`, 
+                     `tabSupplier Technologie`.`technologie`,
+                     `tabSupplier`.`cobinet_member`
+                   FROM `tabSupplier Technologie`
+                   LEFT JOIN `tabSupplier` ON `tabSupplier`.`name` = `tabSupplier Technologie`.`parent`
+                   WHERE `technologie` IN 
+                     /* required technologies */
+                     (SELECT `item_group` AS `technologie`
+                       FROM `tabItem` 
+                       WHERE `name` = '{item_code}'
+                     UNION SELECT `technologie` 
+                       FROM `tabSupplier Technologie`
+                       WHERE `parenttype` = 'Item'
+                         AND `parent` = '{item_code}')
+                   GROUP BY `tabSupplier Technologie`.`parent`
+                   HAVING COUNT(DISTINCT `tabSupplier Technologie`.`technologie`) = (
+                     /* number of mandatory attributes */
+                     SELECT COUNT(*) FROM (SELECT `item_group`  AS `technologie`
+                       FROM `tabItem`
+                       WHERE `name` = '{item_code}'
+                     UNION SELECT `technologie`
+                       FROM `tabSupplier Technologie`
+                       WHERE `parenttype` = 'Item'
+                         AND `parent` = '{item_code}') AS `tblCount`)) AS `suppliers`
+                   LEFT JOIN `tabDynamic Link` AS `tDL` ON (`suppliers`.`name` = `tDL`.`link_name` AND `tDL`.`link_doctype` = "Supplier" AND `tDL`.`parenttype` = "Contact")
+                   LEFT JOIN `tabContact` AS `contacts` ON (`contacts`.`name` = `tDL`.`parent`)
+                   WHERE `contacts`.`user` IS NOT NULL
+                   ORDER BY `suppliers`.`supplier_name` ASC;""".format(item_code=item_code)
+    supplier_matches = frappe.db.sql(sql_query, as_dict=True)
+    return {'suppliers': supplier_matches }
+
 @frappe.whitelist()
 def get_suppliers_by_technology(technology):
     sql_query = """SELECT
@@ -107,6 +149,20 @@ def get_child_items_with_offer(item_code, qty):
     if default_bom:
         # children = get_child_items_with_offer_from_bom(item_code, default_bom, qty)
         children = build_bom_list_with_offer(item_code, default_bom, qty)
+    else:
+        children = None
+    return children
+
+"""
+    This function will check the offers for each item from a request
+    -request: request document name
+    -qty: number of units
+"""
+@frappe.whitelist()
+def get_request_items_with_offer(request, qty):
+    items = frappe.get_all("Item", filters={'von_anfrage': request}, fields=['item_code'])
+    if items:
+        children = build_request_list_with_offer(items, qty)
     else:
         children = None
     return children
@@ -162,7 +218,17 @@ def build_bom_list_with_offer(item_code, bom_no, qty):
         item['offer'] = get_best_offer(item['item_code'], (float(qty) * float(item['qty'])))
         # compensate rate to be per unit
         item['offer']['rate'] = float(item['offer']['rate']) / float(qty)
+        # add status
+        item['status'] = get_offer_status(item['item_code'])
     return consolidated_bom_items
+
+def build_request_list_with_offer(items, qty):
+    # add offer for each item
+    for item in items:
+        item['offer'] = get_best_offer(item['item_code'], float(qty))
+        # add status
+        item['status'] = get_offer_status(item['item_code'])
+    return items
 """
 This function build an item list with quantity per item
 """
@@ -297,3 +363,29 @@ def get_best_offer(item_code, qty):
     except Exception as e:
         best_offer = {'rate': 0, 'supplier': None, 'supplier_name': None, 'reference': None, 'conditions': None, 'error': e, 'valid_until': '2000-01-01'}
     return best_offer
+
+"""
+    This function will return the offer status for an item (todo pending, todo closed, no todos)
+"""
+def get_offer_status(item_code):
+    sql_query = """SELECT (
+                    SELECT COUNT(`name`) 
+                    FROM `tabPreisangebot`
+                    WHERE `item` = "{item}" AND `docstatus` = 1) AS `offers`, 
+
+                    (SELECT COUNT(`status`)
+                    FROM `tabToDo`
+                    WHERE `reference_type` = "Item"
+                      AND `reference_name` = "{item}"
+                      AND `status` = "Open") AS `pending`,
+
+                    (SELECT COUNT(`status`)
+                    FROM `tabToDo`
+                    WHERE `reference_type` = "Item"
+                      AND `reference_name` = "{item}"
+                      AND `status` = "Closed") AS `closed`;""".format(item=item_code)
+    try:
+        offer_status = frappe.db.sql(sql_query, as_dict=True)[0]
+    except Exception as e:
+        offer_status = {'offers': 0, 'pending': 0, 'closed': 0}
+    return offer_status
