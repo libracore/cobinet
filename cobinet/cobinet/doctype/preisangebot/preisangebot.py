@@ -41,6 +41,16 @@ class Preisangebot(Document):
                 return { 'supplier': supplier.name, 'supplier_name': supplier.supplier_name }
         return None
 
+    def on_submit(self):
+        # check if there is a ToDo open
+        todos = frappe.get_all("ToDo", filters={'owner': self.owner, 'reference_type': 'Item', 'reference_name': self.item}, fields=['name'])
+        if todos:
+            # close ToDo
+            record = frappe.get_doc("ToDo", todos[0]['name'])
+            record.status = "Closed"
+            record.save()
+        return
+
 """
  This function is to ignore a proposed price quote, e.g. from the quotation view
 """

@@ -372,20 +372,23 @@ def get_offer_status(item_code):
                     SELECT COUNT(`name`) 
                     FROM `tabPreisangebot`
                     WHERE `item` = "{item}" AND `docstatus` = 1) AS `offers`, 
-
                     (SELECT COUNT(`status`)
                     FROM `tabToDo`
                     WHERE `reference_type` = "Item"
                       AND `reference_name` = "{item}"
                       AND `status` = "Open") AS `pending`,
-
                     (SELECT COUNT(`status`)
                     FROM `tabToDo`
                     WHERE `reference_type` = "Item"
                       AND `reference_name` = "{item}"
-                      AND `status` = "Closed") AS `closed`;""".format(item=item_code)
+                      AND `status` = "Closed") AS `closed`,
+					(SELECT COUNT(`status`)
+                    FROM `tabToDo`
+                    WHERE `reference_type` = "Item"
+                      AND `reference_name` = "{item}"
+                      AND `status` = "Camcelled") AS `rejected`;""".format(item=item_code)
     try:
         offer_status = frappe.db.sql(sql_query, as_dict=True)[0]
     except Exception as e:
-        offer_status = {'offers': 0, 'pending': 0, 'closed': 0}
+        offer_status = {'offers': 0, 'pending': 0, 'closed': 0, 'rejected': 0}
     return offer_status
