@@ -7,7 +7,7 @@ def get_data():
 		{
 			"module_name": "Cobinet",
 			"color": "#1b458f",
-			"icon": "octicon octicon-file-submodule",
+			"icon": "icon cobinet-blue",
 			"type": "module",
 			"label": _("Cobinet")
 		}
