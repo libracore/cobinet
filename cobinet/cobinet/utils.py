@@ -38,7 +38,7 @@ def get_suppliers(item_code):
                    FROM `tabSupplier Technologie`
                    LEFT JOIN `tabSupplier` ON `tabSupplier`.`name` = `tabSupplier Technologie`.`parent`
                    WHERE
-                     `parenttype` = "Supplier" 
+                     `tabSupplier Technologie`.`parenttype` = "Supplier" 
                      AND `technologie` IN 
                      /* required technologies */
                      (SELECT `item_group` AS `technologie`
@@ -48,7 +48,7 @@ def get_suppliers(item_code):
                        FROM `tabSupplier Technologie`
                        WHERE 
                          `tabSupplier Technologie`.`parenttype` = 'Item'
-                         AND `parent` = '{item_code}')
+                         AND `tabSupplier Technologie`.`parent` = '{item_code}')
                    GROUP BY `tabSupplier Technologie`.`parent`
                    HAVING COUNT(DISTINCT `tabSupplier Technologie`.`technologie`) = (
                      /* number of mandatory attributes */
