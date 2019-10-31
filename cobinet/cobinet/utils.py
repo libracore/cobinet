@@ -46,7 +46,8 @@ def get_suppliers(item_code):
                        WHERE `name` = '{item_code}'
                      UNION SELECT `technologie` 
                        FROM `tabSupplier Technologie`
-                       WHERE `parenttype` = 'Item'
+                       WHERE 
+                         `tabSupplier Technologie`.`parenttype` = 'Item'
                          AND `parent` = '{item_code}')
                    GROUP BY `tabSupplier Technologie`.`parent`
                    HAVING COUNT(DISTINCT `tabSupplier Technologie`.`technologie`) = (
@@ -79,7 +80,7 @@ def get_supplier_contacts(item_code):
                    FROM `tabSupplier Technologie`
                    LEFT JOIN `tabSupplier` ON `tabSupplier`.`name` = `tabSupplier Technologie`.`parent`
                    WHERE 
-                     `parenttype` = "Supplier"
+                     `tabSupplier Technologie`.`parenttype` = "Supplier"
                      AND `technologie` IN 
                      /* required technologies */
                      (SELECT `item_group` AS `technologie`
