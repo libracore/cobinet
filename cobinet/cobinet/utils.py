@@ -37,7 +37,9 @@ def get_suppliers(item_code):
                     `tabSupplier`.`cobinet_member`
                    FROM `tabSupplier Technologie`
                    LEFT JOIN `tabSupplier` ON `tabSupplier`.`name` = `tabSupplier Technologie`.`parent`
-                   WHERE `technologie` IN 
+                   WHERE
+                     `parenttype` = "Supplier" 
+                     AND `technologie` IN 
                      /* required technologies */
                      (SELECT `item_group` AS `technologie`
                        FROM `tabItem` 
@@ -76,7 +78,9 @@ def get_supplier_contacts(item_code):
                      `tabSupplier`.`cobinet_member`
                    FROM `tabSupplier Technologie`
                    LEFT JOIN `tabSupplier` ON `tabSupplier`.`name` = `tabSupplier Technologie`.`parent`
-                   WHERE `technologie` IN 
+                   WHERE 
+                     `parenttype` = "Supplier"
+                     AND `technologie` IN 
                      /* required technologies */
                      (SELECT `item_group` AS `technologie`
                        FROM `tabItem` 
@@ -359,7 +363,11 @@ def get_best_offer(item_code, qty):
                ORDER BY `rate` ASC
                LIMIT 1;""".format(item=item_code, qty=qty)
     try:
-        best_offer = frappe.db.sql(sql_query, as_dict=True)[0]
+        offers = frappe.db.sql(sql_query, as_dict=True)
+        if offers:
+            best_offer = offers[0]
+        else:
+            best_offer = {'rate': 0, 'supplier': None, 'supplier_name': None, 'reference': None, 'conditions': None, 'valid_until': '2000-01-01'}
     except Exception as e:
         best_offer = {'rate': 0, 'supplier': None, 'supplier_name': None, 'reference': None, 'conditions': None, 'error': e, 'valid_until': '2000-01-01'}
     return best_offer
@@ -386,7 +394,7 @@ def get_offer_status(item_code):
                     FROM `tabToDo`
                     WHERE `reference_type` = "Item"
                       AND `reference_name` = "{item}"
-                      AND `status` = "Camcelled") AS `rejected`;""".format(item=item_code)
+                      AND `status` = "Cancelled") AS `rejected`;""".format(item=item_code)
     try:
         offer_status = frappe.db.sql(sql_query, as_dict=True)[0]
     except Exception as e:

@@ -16,3 +16,7 @@ DocType: Preisangebot,Please make sure that the offer is valid at least until {0
 DocType: Preisangebot,Term of delivery (days),Lieferfrist (Tage)
 DocType: Preisangebot,Standard Conditions,Standardkonditionen
 DocType: Preisangebot,Conditions review,Konditionen (Freigabe)
+DocType: Item,Shared with,Geteilt mit
+DocType: Item,Assigned to,Zugewiesen an
+DocType: Item,Request quotes from,Angebot anfragen von
+DocType: Item,Request,Anfragen
