@@ -27,15 +27,19 @@ class Anfrage(Document):
         
     def after_insert(self):
         # after a new record has been inserted, create a linked opportunity
-        new_opty = frappe.get_doc({
-            "doctype": "Opportunity",
-            "enquiry_from": "Customer",
-            "opportunity_from": "Customer",     # v11 compatibility
-            "customer": self.kunde,
-            "party_name": self.kunde,           # v11 compatibility
-            "von_anfrage": self.name
-        })
-        new_opty.insert()
-        return
-        
+        try:
+            new_opty = frappe.get_doc({
+                "doctype": "Opportunity",
+                "enquiry_from": "Customer",
+                "opportunity_from": "Customer",     # v11 compatibility
+                "customer": self.kunde,
+                "customer_group": "Firma",          # v12 compatibility
+                "party_name": self.kunde,           # v11 compatibility
+                "von_anfrage": self.name
+            })
+            new_opty.insert()
+            return
+        except Exception as e:
+            frappe.log_error("Unable to create opportunity from {request}: {err}".format(
+                request=self.name, err=e), "New request")
     pass
