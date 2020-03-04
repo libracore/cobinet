@@ -1,0 +1,101 @@
+{
+ "creation": "2020-03-04 13:53:23.178100",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "geheimhaltevereinbarung",
+  "date",
+  "customer",
+  "customer_name",
+  "column_main",
+  "supplier",
+  "supplier_name",
+  "section_notes",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "geheimhaltevereinbarung",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Geheimhaltevereinbarung",
+   "options": "Geheimhaltevereinbarung",
+   "reqd": 1
+  },
+  {
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "label": "Datum",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_main",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "supplier",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Lieferant",
+   "options": "Supplier",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "supplier.supplier_name",
+   "fieldname": "supplier_name",
+   "fieldtype": "Data",
+   "label": "Lieferantenname",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "geheimhaltevereinbarung.customer",
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Kunde",
+   "options": "Customer",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "geheimhaltevereinbarung.customer_name",
+   "fieldname": "customer_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Kundenname",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_notes",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Long Text",
+   "label": "Notizen"
+  }
+ ],
+ "modified": "2020-03-04 15:55:44.642438",
+ "modified_by": "Administrator",
+ "module": "Cobinet",
+ "name": "Zuordnung GHV",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "supplier_name",
+ "track_changes": 1
+}

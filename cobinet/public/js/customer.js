@@ -3,7 +3,7 @@ try {
     cur_frm.dashboard.add_transactions([
         {
             'label': 'Cobinet',
-            'items': ['Preisangebot', 'Zuordnung GHV']
+            'items': ['Geheimhaltevereinbarung']
         }
     ]);
 } catch { /* do nothing for older versions */ }

@@ -36,6 +36,12 @@ def get_data():
                     "name": "Item",
                     "label": _("Item"),
                     "description": _("Item")
+                },
+                {
+                    "type": "doctype",
+                    "name": "Geheimhaltevereinbarung",
+                    "label": _("Geheimhaltevereinbarung"),
+                    "description": _("Geheimhaltevereinbarung")
                 }
             ]
         },

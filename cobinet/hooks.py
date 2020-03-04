@@ -28,6 +28,7 @@ web_include_js = "/assets/cobinet/js/cobinet.js"
 # include js in doctype views
 # doctype_js = {"doctype" : "public/js/doctype.js"}
 doctype_js = {
+  "Customer": "public/js/customer.js",
   "Supplier": "public/js/supplier.js",
   "Item": "public/js/item.js"
 }
