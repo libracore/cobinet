@@ -1,0 +1,170 @@
+{
+ "creation": "2020-04-15 16:08:00.204597",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "customer",
+  "customer_name",
+  "allgemeine_nummer",
+  "contact",
+  "telefon",
+  "email",
+  "column_main",
+  "klassifizierung",
+  "status",
+  "grobeinteilung",
+  "branche",
+  "section_activity",
+  "jahr",
+  "kw",
+  "verantwortlich",
+  "column_activity",
+  "aufgabe",
+  "erledigt",
+  "section_notes",
+  "notizen"
+ ],
+ "fields": [
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Customer",
+   "options": "Customer",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "customer.customer_name",
+   "fieldname": "customer_name",
+   "fieldtype": "Data",
+   "label": "Customer name",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "customer.klassifizierung",
+   "fieldname": "klassifizierung",
+   "fieldtype": "Link",
+   "label": "Klassifizierung",
+   "options": "Klassifizierung",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "customer.status",
+   "fieldname": "status",
+   "fieldtype": "Link",
+   "label": "Status",
+   "options": "Status",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "customer.grobeinteilung",
+   "fieldname": "grobeinteilung",
+   "fieldtype": "Link",
+   "label": "Grobeinteilung",
+   "options": "Grobeinteilung",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "customer.branche",
+   "fieldname": "branche",
+   "fieldtype": "Link",
+   "label": "Branche",
+   "options": "Branche",
+   "read_only": 1
+  },
+  {
+   "fieldname": "telefon",
+   "fieldtype": "Data",
+   "label": "Telefon"
+  },
+  {
+   "fieldname": "column_main",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_activity",
+   "fieldtype": "Section Break",
+   "label": "Aktivit\u00e4t"
+  },
+  {
+   "fieldname": "kw",
+   "fieldtype": "Int",
+   "label": "KW"
+  },
+  {
+   "fieldname": "column_activity",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "contact",
+   "fieldtype": "Link",
+   "label": "Kontaktperson",
+   "options": "Contact"
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "Email"
+  },
+  {
+   "fieldname": "jahr",
+   "fieldtype": "Int",
+   "label": "Jahr"
+  },
+  {
+   "fieldname": "verantwortlich",
+   "fieldtype": "Link",
+   "label": "Verantwortlich",
+   "options": "User"
+  },
+  {
+   "default": "0",
+   "fieldname": "erledigt",
+   "fieldtype": "Check",
+   "label": "Erledigt"
+  },
+  {
+   "fieldname": "aufgabe",
+   "fieldtype": "Data",
+   "label": "Aufgabe"
+  },
+  {
+   "fieldname": "section_notes",
+   "fieldtype": "Section Break",
+   "label": "Notizen"
+  },
+  {
+   "fieldname": "notizen",
+   "fieldtype": "Long Text",
+   "label": "Notizen"
+  },
+  {
+   "fieldname": "allgemeine_nummer",
+   "fieldtype": "Data",
+   "label": "Allgemeine Nummer"
+  }
+ ],
+ "modified": "2020-04-15 21:10:03.461828",
+ "modified_by": "Administrator",
+ "module": "Cobinet",
+ "name": "Aktivitaet",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}
