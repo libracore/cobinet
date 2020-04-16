@@ -122,5 +122,24 @@ def get_data():
                        "description": _("Website Settings")
                    }
             ]
+        },
+        {
+            "label": _("Aktivitäten"),
+            "icon": "fa fa-bolt",
+            "items": [
+                {
+                    "type": "doctype",
+                    "name": "Aktivitaet",
+                    "label": _("Aktivitaet"),
+                    "description": _("Aktivitaet")
+                },
+                {
+                    "type": "report",
+                    "name": "Aktivitätenliste",
+                    "label": _("Aktivitätenliste"),
+                    "doctype": "Aktivitaet",
+                    "is_query_report": True
+                }
+            ]
         }
     ]

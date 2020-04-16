@@ -1,13 +1,16 @@
 {
+ "autoname": "naming_series:",
  "creation": "2020-04-15 16:08:00.204597",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "naming_series",
   "customer",
   "customer_name",
   "allgemeine_nummer",
   "contact",
+  "contact_person",
   "telefon",
   "email",
   "column_main",
@@ -15,6 +18,7 @@
   "status",
   "grobeinteilung",
   "branche",
+  "naehere_umschreibung",
   "section_activity",
   "jahr",
   "kw",
@@ -76,7 +80,8 @@
   {
    "fieldname": "telefon",
    "fieldtype": "Data",
-   "label": "Telefon"
+   "label": "Telefon",
+   "read_only": 1
   },
   {
    "fieldname": "column_main",
@@ -105,7 +110,8 @@
   {
    "fieldname": "email",
    "fieldtype": "Data",
-   "label": "Email"
+   "label": "Email",
+   "read_only": 1
   },
   {
    "fieldname": "jahr",
@@ -143,9 +149,30 @@
    "fieldname": "allgemeine_nummer",
    "fieldtype": "Data",
    "label": "Allgemeine Nummer"
+  },
+  {
+   "fetch_from": "customer.naehere_umschreibung",
+   "fieldname": "naehere_umschreibung",
+   "fieldtype": "Data",
+   "label": "N\u00e4here Umschreibung",
+   "read_only": 1
+  },
+  {
+   "default": "AT-.#####",
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Naming series",
+   "options": "AT-.#####"
+  },
+  {
+   "fieldname": "contact_person",
+   "fieldtype": "Data",
+   "label": "Name Kontaktperson",
+   "read_only": 1
   }
  ],
- "modified": "2020-04-15 21:10:03.461828",
+ "modified": "2020-04-16 21:31:04.770239",
  "modified_by": "Administrator",
  "module": "Cobinet",
  "name": "Aktivitaet",
@@ -166,5 +193,6 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "title_field": "customer_name",
  "track_changes": 1
 }

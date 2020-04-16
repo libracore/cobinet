@@ -20,3 +20,4 @@ DocType: Item,Shared with,Geteilt mit
 DocType: Item,Assigned to,Zugewiesen an
 DocType: Item,Request quotes from,Angebot anfragen von
 DocType: Item,Request,Anfragen
+DocType: Aktivitaet,Aktivitaet,Aktivität
