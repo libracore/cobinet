@@ -153,7 +153,7 @@
   {
    "fetch_from": "customer.naehere_umschreibung",
    "fieldname": "naehere_umschreibung",
-   "fieldtype": "Data",
+   "fieldtype": "Small Text",
    "label": "N\u00e4here Umschreibung",
    "read_only": 1
   },
@@ -172,7 +172,7 @@
    "read_only": 1
   }
  ],
- "modified": "2020-04-16 21:31:04.770239",
+ "modified": "2020-04-18 22:41:01.317529",
  "modified_by": "Administrator",
  "module": "Cobinet",
  "name": "Aktivitaet",

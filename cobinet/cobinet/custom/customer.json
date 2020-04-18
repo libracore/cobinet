@@ -227,7 +227,7 @@
    "fetch_from": null,
    "fetch_if_empty": 0,
    "fieldname": "naehere_umschreibung",
-   "fieldtype": "Data",
+   "fieldtype": "Small Text",
    "hidden": 0,
    "idx": 14,
    "ignore_user_permissions": 0,
