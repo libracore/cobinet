@@ -139,6 +139,20 @@ def get_data():
                     "label": _("Aktivitätenliste"),
                     "doctype": "Aktivitaet",
                     "is_query_report": True
+                },
+                {
+                    "type": "report",
+                    "name": "Export Kunde",
+                    "label": _("Export Kunde"),
+                    "doctype": "Customer",
+                    "is_query_report": True
+                },
+                {
+                    "type": "report",
+                    "name": "Export Adressliste voll",
+                    "label": _("Export Adressliste voll"),
+                    "doctype": "Customer",
+                    "is_query_report": True
                 }
             ]
         }
