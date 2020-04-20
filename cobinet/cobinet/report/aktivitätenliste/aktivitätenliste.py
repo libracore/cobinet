@@ -25,7 +25,8 @@ def get_columns():
         {"label": _("Phone"), "fieldname": "phone", "fieldtype": "Data", "width": 100},
         {"label": _("Email"), "fieldname": "email", "fieldtype": "Data", "width": 100},
         {"label": _("Nähere Umschreibung"), "fieldname": "naehere_umschreibung", "fieldtype": "Data", "width": 100},
-        {"label": _("Aufgabe"), "fieldname": "aufgabe", "fieldtype": "Data", "width": 250},        
+        {"label": _("Aufgabe"), "fieldname": "aufgabe", "fieldtype": "Data", "width": 250},
+        {"label": _("Prio"), "fieldname": "prio", "fieldtype": "Select", "width": 50}      
     ]
     
 def get_data(filters):
@@ -46,7 +47,8 @@ def get_data(filters):
              `telefon` AS `phone`,
              `email` AS `email`,
              `naehere_umschreibung` AS `naehere_umschreibung`,
-             `aufgabe` AS `aufgabe`
+             `aufgabe` AS `aufgabe`,
+             `prio` AS `prio`
          FROM `tabAktivitaet`
          WHERE `kw` = {week} 
             AND `erledigt` = 0
