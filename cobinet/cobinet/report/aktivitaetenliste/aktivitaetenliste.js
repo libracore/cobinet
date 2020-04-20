@@ -2,7 +2,7 @@
 // For license information, please see license.txt
 /* eslint-disable */
 
-frappe.query_reports["Aktivitätenliste"] = {
+frappe.query_reports["Aktivitaetenliste"] = {
 	"filters": [
         {
 			"fieldname":"verantwortlich",

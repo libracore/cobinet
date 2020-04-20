@@ -15,7 +15,7 @@ def execute(filters=None):
 
 def get_columns():
     return [
-        {"label": _("Nr"), "fieldname": "customer", "fieldtype": "Link", "options": "Customer", "width": 50},
+        {"label": _("Nr"), "fieldname": "customer", "fieldtype": "Link", "options": "Customer", "width": 60},
         {"label": _("Kundenname"), "fieldname": "customer_name", "fieldtype": "Data", "width": 120},
         {"label": _("Homepage"), "fieldname": "homepage", "fieldtype": "Data", "width": 100},
         {"label": _("E-Mail-Adresse"), "fieldname": "email", "fieldtype": "Data",  "width": 100},
@@ -52,7 +52,7 @@ def get_data(filters):
              AND `tabDynamic Link`.`parenttype` = "Address"
              AND `tabDynamic Link`.`link_name` = `tabCustomer`.`name`)
          LEFT JOIN `tabAddress` ON `tabAddress`.`name` = `tabDynamic Link`.`parent`
-         WHERE `tabCustomer`.`disabled` = 0;
+         /* WHERE `tabCustomer`.`disabled` = 0 */;
       """
 
     data = frappe.db.sql(sql_query, as_dict=1)

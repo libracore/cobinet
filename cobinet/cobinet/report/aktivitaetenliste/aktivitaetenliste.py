@@ -17,6 +17,7 @@ def get_columns():
     return [
         {"label": _("Aktivität"), "fieldname": "activity", "fieldtype": "Link", "options": "Aktivitaet", "width": 40},
         {"label": _("Verantwortlich"), "fieldname": "verantwortlich", "fieldtype": "Link", "options": "User", "width": 40},
+        {"label": _("Prio"), "fieldname": "prio", "fieldtype": "Select", "width": 50},
         {"label": _("Customer"), "fieldname": "customer", "fieldtype": "Link", "options": "Customer", "width": 80},
         {"label": _("Kundenname"), "fieldname": "customer_name", "fieldtype": "Data",  "width": 100},
         {"label": _("Tel"), "fieldname": "tel", "fieldtype": "Data",  "width": 120},
@@ -25,8 +26,7 @@ def get_columns():
         {"label": _("Phone"), "fieldname": "phone", "fieldtype": "Data", "width": 100},
         {"label": _("Email"), "fieldname": "email", "fieldtype": "Data", "width": 100},
         {"label": _("Nähere Umschreibung"), "fieldname": "naehere_umschreibung", "fieldtype": "Data", "width": 100},
-        {"label": _("Aufgabe"), "fieldname": "aufgabe", "fieldtype": "Data", "width": 250},
-        {"label": _("Prio"), "fieldname": "prio", "fieldtype": "Select", "width": 50}      
+        {"label": _("Aufgabe"), "fieldname": "aufgabe", "fieldtype": "Data", "width": 250}
     ]
     
 def get_data(filters):

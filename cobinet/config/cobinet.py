@@ -42,6 +42,13 @@ def get_data():
                     "name": "Geheimhaltevereinbarung",
                     "label": _("Geheimhaltevereinbarung"),
                     "description": _("Geheimhaltevereinbarung")
+                },
+                {
+                    "type": "report",
+                    "name": "Uebersicht GHV",
+                    "label": _("Uebersicht GHV"),
+                    "doctype": "Geheimhaltevereinbarung",
+                    "is_query_report": True
                 }
             ]
         },
@@ -135,8 +142,8 @@ def get_data():
                 },
                 {
                     "type": "report",
-                    "name": "Aktivitätenliste",
-                    "label": _("Aktivitätenliste"),
+                    "name": "Aktivitaetenliste",
+                    "label": _("Aktivitaetenliste"),
                     "doctype": "Aktivitaet",
                     "is_query_report": True
                 },
