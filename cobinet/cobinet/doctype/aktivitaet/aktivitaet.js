@@ -48,7 +48,7 @@ frappe.ui.form.on('Aktivitaet', {
                         cur_frm.set_value('contact', contact.name);
                         cur_frm.set_value('telefon', contact.phone);
                         cur_frm.set_value('email', contact.email_id);
-                        cur_frm.set_value('contact_person', contact.first_name + " " + contact.last_name);
+                        cur_frm.set_value('contact_person', (contact.first_name||"") + " " + (contact.last_name||""));
                     } 
                 }
             });

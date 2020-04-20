@@ -15,12 +15,12 @@ def execute(filters=None):
 
 def get_columns():
     return [
-        {"label": _("Aktivität"), "fieldname": "activity", "fieldtype": "Link", "options": "Aktivitaet", "width": 80},
-        {"label": _("Verantwortlich"), "fieldname": "verantwortlich", "fieldtype": "Link", "options": "User", "width": 80},
+        {"label": _("Aktivität"), "fieldname": "activity", "fieldtype": "Link", "options": "Aktivitaet", "width": 40},
+        {"label": _("Verantwortlich"), "fieldname": "verantwortlich", "fieldtype": "Link", "options": "User", "width": 40},
         {"label": _("Customer"), "fieldname": "customer", "fieldtype": "Link", "options": "Customer", "width": 80},
         {"label": _("Kundenname"), "fieldname": "customer_name", "fieldtype": "Data",  "width": 100},
         {"label": _("Tel"), "fieldname": "tel", "fieldtype": "Data",  "width": 120},
-        {"label": _("Kontakt"), "fieldname": "contact", "fieldtype": "Link", "options": "Contact", "width": 80},
+        {"label": _("Kontakt"), "fieldname": "contact", "fieldtype": "Link", "options": "Contact", "width": 40},
         {"label": _("Kontaktperson"), "fieldname": "contact_person", "fieldtype": "Data", "width": 100},
         {"label": _("Phone"), "fieldname": "phone", "fieldtype": "Data", "width": 100},
         {"label": _("Email"), "fieldname": "email", "fieldtype": "Data", "width": 100},
