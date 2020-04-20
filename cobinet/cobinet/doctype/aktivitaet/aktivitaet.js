@@ -45,11 +45,23 @@ frappe.ui.form.on('Aktivitaet', {
                 callback: function(r) {
                     if(r.message) {
                         var contact = r.message;
-                        cur_frm.set_value('contact', contact.name);
-                        cur_frm.set_value('telefon', contact.phone);
-                        cur_frm.set_value('email', contact.email_id);
-                        cur_frm.set_value('contact_person', (contact.first_name||"") + " " + (contact.last_name||""));
+                        set_contact(contact);
                     } 
+                }
+            });
+        }
+    },
+    contact: function(frm) {
+        if (frm.doc.contact) {
+            frappe.call({
+                "method": "frappe.client.get",
+                "args": {
+                    "doctype": "Contact",
+                    "name": frm.doc.contact
+                },
+                "callback": function(response) {
+                    var contact = response.message;
+                    set_contact(contact);
                 }
             });
         }
@@ -68,4 +80,11 @@ function getWeekNumber(d) {
     var weekNo = Math.ceil(( ( (d - yearStart) / 86400000) + 1)/7);
     // Return array of year and week number
     return weekNo;
+}
+
+function set_contact(contact) {
+    cur_frm.set_value('contact', contact.name);
+    cur_frm.set_value('telefon', contact.phone);
+    cur_frm.set_value('email', contact.email_id);
+    cur_frm.set_value('contact_person', (contact.first_name||"") + " " + (contact.last_name||""));
 }
