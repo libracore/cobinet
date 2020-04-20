@@ -16,6 +16,12 @@ frappe.query_reports["Aktivitaetenliste"] = {
 			"fieldtype": "Int",
 			"default": getWeekNumber(new Date()),
             "reqd": 1
+        },
+        {
+			"fieldname":"prio",
+			"label": __("Prio"),
+			"fieldtype": "Select",
+			"options": "\nHoch\nMittel\nTief"
         }
 	]
 };

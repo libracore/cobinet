@@ -35,7 +35,9 @@ def get_data(filters):
     if not filters.week:
         today = datetime.date.today()
         filters.verantwortlich = int(today.strftime("%V"))
-            
+    if not filters.prio:
+        filters.prio = "%"
+                    
     sql_query = """SELECT
              `name` AS `activity`,
              `verantwortlich` AS `verantwortlich`,
@@ -53,8 +55,9 @@ def get_data(filters):
          WHERE `kw` = {week} 
             AND `erledigt` = 0
             AND (`verantwortlich` IS NULL OR `verantwortlich` LIKE '{verantwortlich}')
+            AND `prio` LIKE '{prio}'
          ;
-      """.format(week=filters.week, verantwortlich=filters.verantwortlich)
+      """.format(week=filters.week, verantwortlich=filters.verantwortlich, prio=filters.prio)
 
     data = frappe.db.sql(sql_query, as_dict=1)
 
