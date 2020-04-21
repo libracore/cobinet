@@ -9,8 +9,10 @@
   "customer",
   "customer_name",
   "allgemeine_nummer",
+  "homepage",
   "contact",
   "contact_person",
+  "funktion",
   "telefon",
   "email",
   "column_main",
@@ -154,7 +156,8 @@
   {
    "fieldname": "allgemeine_nummer",
    "fieldtype": "Data",
-   "label": "Allgemeine Nummer"
+   "label": "Allgemeine Nummer",
+   "read_only": 1
   },
   {
    "fetch_from": "customer.naehere_umschreibung",
@@ -185,9 +188,22 @@
    "in_standard_filter": 1,
    "label": "Priorit\u00e4t",
    "options": "Hoch\nMittel\nTief"
+  },
+  {
+   "fetch_from": "customer.website",
+   "fieldname": "homepage",
+   "fieldtype": "Data",
+   "label": "Homepage",
+   "read_only": 1
+  },
+  {
+   "fieldname": "funktion",
+   "fieldtype": "Data",
+   "label": "Funktion",
+   "read_only": 1
   }
  ],
- "modified": "2020-04-20 15:44:00.935411",
+ "modified": "2020-04-21 17:17:36.542017",
  "modified_by": "Administrator",
  "module": "Cobinet",
  "name": "Aktivitaet",

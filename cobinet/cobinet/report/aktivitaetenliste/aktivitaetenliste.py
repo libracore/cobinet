@@ -20,13 +20,13 @@ def get_columns():
         {"label": _("Prio"), "fieldname": "prio", "fieldtype": "Select", "width": 50},
         {"label": _("Customer"), "fieldname": "customer", "fieldtype": "Link", "options": "Customer", "width": 80},
         {"label": _("Kundenname"), "fieldname": "customer_name", "fieldtype": "Data",  "width": 100},
-        {"label": _("Tel"), "fieldname": "tel", "fieldtype": "Data",  "width": 120},
+        {"label": _("Allg. Tel."), "fieldname": "tel", "fieldtype": "Data",  "width": 120},
         {"label": _("Kontakt"), "fieldname": "contact", "fieldtype": "Link", "options": "Contact", "width": 40},
         {"label": _("Kontaktperson"), "fieldname": "contact_person", "fieldtype": "Data", "width": 100},
-        {"label": _("Phone"), "fieldname": "phone", "fieldtype": "Data", "width": 100},
-        {"label": _("Email"), "fieldname": "email", "fieldtype": "Data", "width": 100},
+        {"label": _("Phone"), "fieldname": "phone", "fieldtype": "Data", "width": 120},
+        #{"label": _("Email"), "fieldname": "email", "fieldtype": "Data", "width": 100},
         {"label": _("Nähere Umschreibung"), "fieldname": "naehere_umschreibung", "fieldtype": "Data", "width": 100},
-        {"label": _("Aufgabe"), "fieldname": "aufgabe", "fieldtype": "Data", "width": 250}
+        {"label": _("Aufgabe"), "fieldname": "aufgabe", "fieldtype": "Data", "width": 750}
     ]
     
 def get_data(filters):
