@@ -34,7 +34,10 @@ def get_data(filters):
         filters.verantwortlich = "%"
     if not filters.week:
         today = datetime.date.today()
-        filters.verantwortlich = int(today.strftime("%V"))
+        filters.week = int(today.strftime("%V"))
+    if not filters.year:
+        today = datetime.date.today()
+        filters.year = int(today.strftime("%Y"))
     if not filters.prio:
         filters.prio = "%"
                     
@@ -56,8 +59,9 @@ def get_data(filters):
             AND `erledigt` = 0
             AND (`verantwortlich` IS NULL OR `verantwortlich` LIKE '{verantwortlich}')
             AND `prio` LIKE '{prio}'
+            AND `jahr` = {year}
          ;
-      """.format(week=filters.week, verantwortlich=filters.verantwortlich, prio=filters.prio)
+      """.format(week=filters.week, verantwortlich=filters.verantwortlich, prio=filters.prio, year=filters.year)
 
     data = frappe.db.sql(sql_query, as_dict=1)
 

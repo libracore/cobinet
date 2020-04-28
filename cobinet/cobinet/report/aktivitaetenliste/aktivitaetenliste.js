@@ -18,6 +18,13 @@ frappe.query_reports["Aktivitaetenliste"] = {
             "reqd": 1
         },
         {
+			"fieldname":"year",
+			"label": __("Year"),
+			"fieldtype": "Int",
+			"default": new Date().getFullYear(),
+            "reqd": 1
+        },
+        {
 			"fieldname":"prio",
 			"label": __("Prio"),
 			"fieldtype": "Select",
