@@ -26,6 +26,13 @@ def get_data():
                     "description": _("Opportunity")
                 },
                 {
+                    "type": "report",
+                    "name": "Liste offener Anfragen",
+                    "label": _("Liste offener Anfragen"),
+                    "doctype": "Opportunity",
+                    "is_query_report": True
+                },
+                {
                     "type": "doctype",
                     "name": "Quotation",
                     "label": _("Quotation"),
