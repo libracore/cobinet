@@ -16,7 +16,7 @@ def execute(filters=None):
 def get_columns():
     return [
         {"label": _("Formel"), "fieldname": "formel", "fieldtype": "Data", "width": 100},
-        {"label": _("Nr"), "fieldname": "customer", "fieldtype": "Link", "options": "Customer", "width": 50},
+        {"label": _("Nr"), "fieldname": "customer", "fieldtype": "Link", "options": "Customer", "width": 55},
         {"label": _("Kundenname"), "fieldname": "customer_name", "fieldtype": "Data", "width": 120},
         {"label": _("Homepage"), "fieldname": "homepage", "fieldtype": "Data", "width": 150},
         {"label": _("Standard Email"), "fieldname": "email", "fieldtype": "Data",  "width": 150},
@@ -45,12 +45,12 @@ def get_data(filters):
           `tabCustomer`.`name` AS `customer`,
           `tabCustomer`.`customer_name` AS `customer_name`,
           `tabCustomer`.`website` AS `homepage`,
-          `tabAddress`.`email_id` AS `email`,
-          `tabAddress`.`phone` AS `phone`,
-          `tabAddress`.`address_line1` AS `address_line1`,
-          `tabAddress`.`address_line2` AS `address_line2`,
-          `tabAddress`.`pincode` AS `pincode`,
-          `tabAddress`.`city` AS `city`,
+          `tUAdr`.`email_id` AS `email`,
+          `tUAdr`.`phone` AS `phone`,
+          `tUAdr`.`address_line1` AS `address_line1`,
+          `tUAdr`.`address_line2` AS `address_line2`,
+          `tUAdr`.`pincode` AS `pincode`,
+          `tUAdr`.`city` AS `city`,
           `tabContact`.`name` AS `contact`,
           `tabContact`.`first_name` AS `first_name`,
           `tabContact`.`last_name` AS `last_name`,
@@ -65,8 +65,27 @@ def get_data(filters):
         FROM `tabCustomer`
         JOIN `tabDynamic Link` AS `DL1` ON (`tabCustomer`.`name` = `DL1`.`link_name` AND `DL1`.`link_doctype` = 'Customer' AND `DL1`.`parenttype` = 'Contact')
         LEFT JOIN `tabContact` ON `DL1`.`parent` = `tabContact`.`name`
-        JOIN `tabDynamic Link` AS `DL2` ON (`tabCustomer`.`name` = `DL2`.`link_name` AND `DL2`.`link_doctype` = 'Customer' AND `DL2`.`parenttype` = 'Address')
-        LEFT JOIN `tabAddress` ON `DL2`.`parent` = `tabAddress`.`name`
+        LEFT JOIN (
+            SELECT *
+            FROM (
+              SELECT 
+                `tabAddress`.`email_id` AS `email_id`,
+                `tabAddress`.`phone` AS `phone`,
+                `tabAddress`.`address_line1` AS `address_line1`,
+                `tabAddress`.`address_line2` AS `address_line2`,
+                `tabAddress`.`pincode` AS `pincode`,
+                `tabAddress`.`city` AS `city`,
+                `tDL`.`link_name` AS `customer`
+              FROM `tabAddress`
+              LEFT JOIN `tabDynamic Link` AS `tDL` ON (
+                `tabAddress`.`name` = `tDL`.`parent` 
+                AND `tDL`.`link_doctype` = 'Customer' 
+                AND `tDL`.`parenttype` = 'Address'
+              )
+              ORDER BY `tabAddress`.`is_primary_address` DESC
+            ) AS `tAdr`
+            GROUP BY `tAdr`.`customer`
+        ) AS `tUAdr` ON `tabCustomer`.`name` = `tUAdr`.`customer`
         ORDER BY `tabCustomer`.`name` ASC;
       """
 
