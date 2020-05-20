@@ -34,33 +34,58 @@ def get_data(filters):
              IFNULL(`betreff`, "-") AS `betreff`,
              `angebotstermin` AS `angebotstermin`,
              IFNULL((SELECT 
-               IF(`status` = "Offen", CONCAT("<span style='color: orange;'>", `supplier_name`, ": ", `status`, "</span>"),
-               IF(`status` = "Angeboten", CONCAT("<span style='color: green;'>", `supplier_name`, ": ", `status`, "</span>"),
-               CONCAT("<span style='color: red;'>", `supplier_name`, ": ", `status`, "</span>")))
-              FROM `tabOpportunity Anfrage`
-              WHERE `parent` = `tabOpportunity`.`name` AND `idx` = 1), "-") AS `anfrage_1`,
-              IFNULL((SELECT 
-               IF(`status` = "Offen", CONCAT("<span style='color: orange;'>", `supplier_name`, ": ", `status`, "</span>"),
-               IF(`status` = "Angeboten", CONCAT("<span style='color: green;'>", `supplier_name`, ": ", `status`, "</span>"),
-               CONCAT("<span style='color: red;'>", `supplier_name`, ": ", `status`, "</span>")))
-              FROM `tabOpportunity Anfrage`
-              WHERE `parent` = `tabOpportunity`.`name` AND `idx` = 2), "-") AS `anfrage_2`,
-              IFNULL((SELECT 
-               IF(`status` = "Offen", CONCAT("<span style='color: orange;'>", `supplier_name`, ": ", `status`, "</span>"),
-               IF(`status` = "Angeboten", CONCAT("<span style='color: green;'>", `supplier_name`, ": ", `status`, "</span>"),
-               CONCAT("<span style='color: red;'>", `supplier_name`, ": ", `status`, "</span>")))
-              FROM `tabOpportunity Anfrage`
-              WHERE `parent` = `tabOpportunity`.`name` AND `idx` = 3), "-") AS `anfrage_3`,
-              IFNULL((SELECT 
-               IF(`status` = "Offen", CONCAT("<span style='color: orange;'>", `supplier_name`, ": ", `status`, "</span>"),
-               IF(`status` = "Angeboten", CONCAT("<span style='color: green;'>", `supplier_name`, ": ", `status`, "</span>"),
-               CONCAT("<span style='color: red;'>", `supplier_name`, ": ", `status`, "</span>")))
-              FROM `tabOpportunity Anfrage`
-              WHERE `parent` = `tabOpportunity`.`name` AND `idx` = 4), "-") AS `anfrage_4`,
-              IFNULL((SELECT 
-               IF(`status` = "Offen", CONCAT("<span style='color: orange;'>", `supplier_name`, ": ", `status`, "</span>"),
-               IF(`status` = "Angeboten", CONCAT("<span style='color: green;'>", `supplier_name`, ": ", `status`, "</span>"),
-               CONCAT("<span style='color: red;'>", `supplier_name`, ": ", `status`, "</span>")))
+               CONCAT("<span style='color: ", 
+                 IF(`status` = "Offen", "orange",
+                  IF(`status` = "Angeboten", "green", "red")
+                 ), "; background-color: ",
+                 IF(`selected` = "Ausgewählt", "#DAF7A6",
+                  IF(`selected` = "Abgesagt", "#FFE5CC", "white")
+                 ), "; '>", 
+                 `supplier_name`, ": ", `status`, " / ", `selected`, "</span>")
+               FROM `tabOpportunity Anfrage`
+               WHERE `parent` = `tabOpportunity`.`name` AND `idx` = 1), "-") AS `anfrage_1`,
+             IFNULL((SELECT 
+               CONCAT("<span style='color: ", 
+                 IF(`status` = "Offen", "orange",
+                  IF(`status` = "Angeboten", "green", "red")
+                 ), "; background-color: ",
+                 IF(`selected` = "Ausgewählt", "#DAF7A6",
+                  IF(`selected` = "Abgesagt", "#FFE5CC", "white")
+                 ), "; '>", 
+                 `supplier_name`, ": ", `status`, " / ", `selected`, "</span>")
+               FROM `tabOpportunity Anfrage`
+               WHERE `parent` = `tabOpportunity`.`name` AND `idx` = 2), "-") AS `anfrage_2`,
+             IFNULL((SELECT 
+               CONCAT("<span style='color: ", 
+                 IF(`status` = "Offen", "orange",
+                  IF(`status` = "Angeboten", "green", "red")
+                 ), "; background-color: ",
+                 IF(`selected` = "Ausgewählt", "#DAF7A6",
+                  IF(`selected` = "Abgesagt", "#FFE5CC", "white")
+                 ), "; '>", 
+                 `supplier_name`, ": ", `status`, " / ", `selected`, "</span>")
+               FROM `tabOpportunity Anfrage`
+               WHERE `parent` = `tabOpportunity`.`name` AND `idx` = 3), "-") AS `anfrage_3`,
+             IFNULL((SELECT 
+               CONCAT("<span style='color: ", 
+                 IF(`status` = "Offen", "orange",
+                  IF(`status` = "Angeboten", "green", "red")
+                 ), "; background-color: ",
+                 IF(`selected` = "Ausgewählt", "#DAF7A6",
+                  IF(`selected` = "Abgesagt", "#FFE5CC", "white")
+                 ), "; '>", 
+                 `supplier_name`, ": ", `status`, " / ", `selected`, "</span>")
+               FROM `tabOpportunity Anfrage`
+               WHERE `parent` = `tabOpportunity`.`name` AND `idx` = 4), "-") AS `anfrage_4`,
+             IFNULL((SELECT 
+               CONCAT("<span style='color: ", 
+                 IF(`status` = "Offen", "orange",
+                  IF(`status` = "Angeboten", "green", "red")
+                 ), "; background-color: ",
+                 IF(`selected` = "Ausgewählt", "#DAF7A6",
+                  IF(`selected` = "Abgesagt", "#FFE5CC", "white")
+                 ), "; '>", 
+                 `supplier_name`, ": ", `status`, " / ", `selected`, "</span>")
               FROM `tabOpportunity Anfrage`
               WHERE `parent` = `tabOpportunity`.`name` AND `idx` = 5), "-") AS `anfrage_5`
          FROM `tabOpportunity`

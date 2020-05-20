@@ -36,22 +36,38 @@ def get_data(filters):
              `tabCustomer`.`name` AS `customer`,
              `tabCustomer`.`customer_name` AS `customer_name`,
              `tabCustomer`.`website` AS `homepage`,
-             `tabAddress`.`email_id` AS `email`,
-             `tabAddress`.`phone` AS `phone`,
-             `tabAddress`.`address_line1` AS `address_line1`,
-             `tabAddress`.`pincode` AS `pincode`,
-             `tabAddress`.`city` AS `city`,
+             `tUAdr`.`email_id` AS `email`,
+             `tUAdr`.`phone` AS `phone`,
+             `tUAdr`.`address_line1` AS `address_line1`,
+             `tUAdr`.`pincode` AS `pincode`,
+             `tUAdr`.`city` AS `city`,
              `tabCustomer`.`klassifizierung` AS `klassifizierung`,
              `tabCustomer`.`status` AS `status`,
              `tabCustomer`.`grobeinteilung` AS `grobeinteilung`,
              `tabCustomer`.`branche` AS `branche`,
              `tabCustomer`.`naehere_umschreibung` AS `naehere_umschreibung`
          FROM `tabCustomer`
-         LEFT JOIN `tabDynamic Link` ON (
-             `tabDynamic Link`.`link_doctype` = "Customer" 
-             AND `tabDynamic Link`.`parenttype` = "Address"
-             AND `tabDynamic Link`.`link_name` = `tabCustomer`.`name`)
-         LEFT JOIN `tabAddress` ON `tabAddress`.`name` = `tabDynamic Link`.`parent`
+         LEFT JOIN (
+            SELECT *
+            FROM (
+              SELECT 
+                `tabAddress`.`email_id` AS `email_id`,
+                `tabAddress`.`phone` AS `phone`,
+                `tabAddress`.`address_line1` AS `address_line1`,
+                `tabAddress`.`address_line2` AS `address_line2`,
+                `tabAddress`.`pincode` AS `pincode`,
+                `tabAddress`.`city` AS `city`,
+                `tDL`.`link_name` AS `customer`
+              FROM `tabAddress`
+              LEFT JOIN `tabDynamic Link` AS `tDL` ON (
+                `tabAddress`.`name` = `tDL`.`parent` 
+                AND `tDL`.`link_doctype` = 'Customer' 
+                AND `tDL`.`parenttype` = 'Address'
+              )
+              ORDER BY `tabAddress`.`is_primary_address` DESC
+            ) AS `tAdr`
+            GROUP BY `tAdr`.`customer`
+        ) AS `tUAdr` ON `tabCustomer`.`name` = `tUAdr`.`customer`
          /* WHERE `tabCustomer`.`disabled` = 0 */;
       """
 
