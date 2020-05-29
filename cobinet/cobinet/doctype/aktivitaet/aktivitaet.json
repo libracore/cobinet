@@ -28,6 +28,8 @@
   "verantwortlich",
   "column_activity",
   "aufgabe",
+  "opportunity",
+  "prevdoc_docname",
   "prio",
   "erledigt",
   "section_notes",
@@ -208,9 +210,22 @@
    "fieldtype": "Data",
    "label": "Mobile",
    "read_only": 1
+  },
+  {
+   "fieldname": "opportunity",
+   "fieldtype": "Link",
+   "label": "Opportunity",
+   "options": "Opportunity"
+  },
+  {
+   "fieldname": "prevdoc_docname",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "prevdoc_docname",
+   "options": "Opportunity"
   }
  ],
- "modified": "2020-04-28 11:47:36.001161",
+ "modified": "2020-05-29 14:25:48.794800",
  "modified_by": "Administrator",
  "module": "Cobinet",
  "name": "Aktivitaet",

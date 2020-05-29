@@ -30,7 +30,8 @@ web_include_js = "/assets/cobinet/js/cobinet.js"
 doctype_js = {
   "Customer": "public/js/customer.js",
   "Supplier": "public/js/supplier.js",
-  "Item": "public/js/item.js"
+  "Item": "public/js/item.js",
+  "Opportunity": "public/js/opportunity.js"
 }
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}

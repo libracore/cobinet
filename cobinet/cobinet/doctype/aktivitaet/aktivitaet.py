@@ -31,3 +31,32 @@ def move_activities_to_next_week():
     
     frappe.db.commit()
     return
+
+"""
+This function is used to create an activity from an opportunity
+"""
+@frappe.whitelist()
+def create_linked_activity(opportunity):
+    # prepare date ranges
+    today = datetime.date.today()
+    week = int(today.strftime("%V"))
+    year = int(today.strftime("%Y"))
+    # read opportunity
+    opty = frappe.get_doc("Opportunity", opportunity)
+    # create activity
+    acty = frappe.get_doc({
+        'doctype': 'Aktivitaet',
+        'customer': opty.party_name,
+        'contact': opty.contact_person,
+        'jahr': year,
+        'kw': week,
+        'opportunity': opportunity,
+        'prevdoc_docname': opportunity
+    })
+    new_acty = acty.insert()
+    #opty.activity = new_acty.name
+    #opty.save()
+    frappe.db.commit()
+    return new_acty.name
+            
+        
