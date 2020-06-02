@@ -56,6 +56,13 @@ def get_data():
                     "label": _("Uebersicht GHV"),
                     "doctype": "Geheimhaltevereinbarung",
                     "is_query_report": True
+                },
+                {
+                    "type": "report",
+                    "name": "Anfragen und Chancen",
+                    "label": _("Anfragen und Chancen"),
+                    "doctype": "Opportunity",
+                    "is_query_report": True
                 }
             ]
         },

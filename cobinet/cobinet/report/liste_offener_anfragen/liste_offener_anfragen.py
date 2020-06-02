@@ -21,7 +21,7 @@ def get_columns():
         {"label": _("Betreff"), "fieldname": "betreff", "fieldtype": "Data", "width": 150},
         {"label": _("Wiedervorlage"), "fieldname": "next_contact", "fieldtype": "Data", "width": 75},
         {"label": _("Angebotstermin"), "fieldname": "angebotstermin", "fieldtype": "date", "width": 90},
-        {"label": _("Anfragetext"), "fieldname": "anfragetext", "fieldtype": "Small Text", "width": 100},
+        # {"label": _("Anfragetext"), "fieldname": "anfragetext", "fieldtype": "Small Text", "width": 100},
         {"label": _("Anfrage 1"), "fieldname": "anfrage_1", "fieldtype": "data", "width": 150},
         {"label": _("Anfrage 2"), "fieldname": "anfrage_2", "fieldtype": "data", "width": 150},
         {"label": _("Anfrage 3"), "fieldname": "anfrage_3", "fieldtype": "data", "width": 150},

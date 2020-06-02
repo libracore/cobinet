@@ -65,6 +65,26 @@ frappe.ui.form.on('Aktivitaet', {
                 }
             });
         }
+    },
+    opportunity: function(frm) {
+        // update prevdoc reference to keep apportunity dashboard working 
+        cur_frm.set_value('prevdoc_docname', frm.doc.opportunity);
+        // fetch customer from opportunity (allows routing)
+        if (frm.doc.opportunity) {
+            frappe.call({
+               method: "frappe.client.get",
+               args: {
+                    "doctype": "Opportunity",
+                    "name": frm.doc.opportunity
+               },
+               callback: function(response) {
+                    var opportunity = response.message;
+                    if (opportunity) {
+                       cur_frm.set_value('customer', opportunity.party_name);
+                    }
+               }
+            });
+        }
     }
 });
 
