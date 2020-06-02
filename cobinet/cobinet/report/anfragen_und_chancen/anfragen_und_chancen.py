@@ -31,7 +31,7 @@ def get_data(filters):
                     
     sql_query = """SELECT
              `name` AS `name`,
-             `to_discuss` AS `to_discuss`,
+             IFNULL(`to_discuss`, "-") AS `to_discuss`,
              `transaction_date` AS `transaction_date`,
              `party_name` AS `customer`,
              `customer_name` AS `customer_name`,
