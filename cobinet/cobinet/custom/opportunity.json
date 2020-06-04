@@ -1083,6 +1083,28 @@
    "property_type": "Check",
    "value": "0"
   }
+   "_assign": null,
+   "_comments": null,
+   "_liked_by": null,
+   "_user_tags": null,
+   "creation": "2020-05-26 07:15:33.931717",
+   "default_value": null,
+   "doc_type": "Opportunity",
+   "docstatus": 0,
+   "doctype_or_field": "DocField",
+   "field_name": "more_info",
+   "idx": 0,
+   "modified": "2020-06-04 14:30:33.931717",
+   "modified_by": "Administrator",
+   "name": "Opportunity-more_info-collapsible",
+   "owner": "Administrator",
+   "parent": null,
+   "parentfield": null,
+   "parenttype": null,
+   "property": "collapsible",
+   "property_type": "Check",
+   "value": "0"
+  }
  ],
  "sync_on_migrate": 1
 }
