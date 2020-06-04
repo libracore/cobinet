@@ -38,7 +38,8 @@ def get_data(filters):
              `wahrscheinlichkeit` AS `probability`,
              `volume` AS `volume`
          FROM `tabOpportunity`
-         WHERE `party_name` LIKE '{customer}';
+         WHERE `party_name` LIKE '{customer}'
+         ORDER BY `name` DESC;
       """.format(customer=filters.customer)
 
     data = frappe.db.sql(sql_query, as_dict=1)
