@@ -158,7 +158,7 @@ def get_data(filters):
                WHERE `opportunity` = `tabOpportunity`.`name` LIMIT 1) AS `next_contact`
          FROM `tabOpportunity`
          WHERE `status` IN ("Open", "Replied", "Quotation")
-         ORDER BY `angebotstermin` ASC;
+         ORDER BY `name` DESC;
       """
 
     data = frappe.db.sql(sql_query, as_dict=1)
