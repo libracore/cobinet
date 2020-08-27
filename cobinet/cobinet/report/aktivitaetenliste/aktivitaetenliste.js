@@ -8,7 +8,8 @@ frappe.query_reports["Aktivitaetenliste"] = {
 			"fieldname":"verantwortlich",
 			"label": __("Verantwortlich"),
 			"fieldtype": "Link",
-			"options": "User"
+			"options": "User",
+            "default": frappe.user.name
         },
         {
 			"fieldname":"week",
