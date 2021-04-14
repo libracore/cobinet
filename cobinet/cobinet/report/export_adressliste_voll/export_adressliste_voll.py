@@ -1,4 +1,4 @@
-# Copyright (c) 2020, libracore and contributors
+# Copyright (c) 2020-2021, libracore and contributors
 # For license information, please see license.txt
 
 from __future__ import unicode_literals
@@ -92,3 +92,28 @@ def get_data(filters):
     data = frappe.db.sql(sql_query, as_dict=1)
 
     return data
+
+"""
+CobiExport: allow to create a complete export object
+"""
+@frappe.whitelist()
+def customer_export(customer, with_details=False):
+    customer = frappe.get_doc("Customer", customer)
+    data = {
+        'customer': customer.as_dict(),
+        'contacts': [],
+        'addresses': []
+    }
+    contact_links = frappe.get_all("Dynamic Link", fiters={'link_name': customer.name, 'link_doctype': 'Customer', 'parenttype' = 'Contact', fields=['parent'])
+    # fetch linked records
+    for l in contact_links:
+        contact = frappe.get_doc("Contact", l['parent'])
+        data['contacts'].append(contact.as_dict())
+    address_links = frappe.get_all("Dynamic Link", fiters={'link_name': customer.name, 'link_doctype': 'Customer', 'parenttype' = 'Address', fields=['parent'])
+    for l in address_links:
+        address = frappe.get_doc("Address", l['parent'])
+        data['addresses'].append(address.as_dict())
+    # remove details unless selected
+    if not with_details:
+        data['customer']['customer_details'] = None
+    return "{0}".format(data)
