@@ -104,12 +104,12 @@ def customer_export(customer, with_details=False):
         'contacts': [],
         'addresses': []
     }
-    contact_links = frappe.get_all("Dynamic Link", fiters={'link_name': customer.name, 'link_doctype': 'Customer', 'parenttype' = 'Contact', fields=['parent'])
+    contact_links = frappe.get_all("Dynamic Link", filters={'link_name': customer.name, 'link_doctype': 'Customer', 'parenttype': 'Contact'}, fields=['parent'])
     # fetch linked records
     for l in contact_links:
         contact = frappe.get_doc("Contact", l['parent'])
         data['contacts'].append(contact.as_dict())
-    address_links = frappe.get_all("Dynamic Link", fiters={'link_name': customer.name, 'link_doctype': 'Customer', 'parenttype' = 'Address', fields=['parent'])
+    address_links = frappe.get_all("Dynamic Link", filters={'link_name': customer.name, 'link_doctype': 'Customer', 'parenttype': 'Address'}, fields=['parent'])
     for l in address_links:
         address = frappe.get_doc("Address", l['parent'])
         data['addresses'].append(address.as_dict())
