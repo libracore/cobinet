@@ -5,6 +5,7 @@ from __future__ import unicode_literals
 import frappe
 import datetime
 from frappe import _
+import json
 
 def execute(filters=None):
     filters = frappe._dict(filters or {})
@@ -116,4 +117,4 @@ def customer_export(customer, with_details=False):
     # remove details unless selected
     if not with_details:
         data['customer']['customer_details'] = None
-    return "{0}".format(data)
+    return json.dumps(data, default=str)
