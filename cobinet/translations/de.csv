@@ -26,3 +26,5 @@ Report: Uebersicht GHV,Uebersicht GHV,Übersicht GHV
 DocType: Opportunity,Selected,Auswahl
 DocType: Opportunity,Replied,Nachgefasst
 DocType: Contact,Company Name,Firma
+DocType: Anmeldung Kundenevent,Save,Speichern
+DocType: Anmeldung Kundenevent,Message,Nachricht
