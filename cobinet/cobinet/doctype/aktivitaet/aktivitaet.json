@@ -147,6 +147,7 @@
   {
    "fieldname": "section_notes",
    "fieldtype": "Section Break",
+   "hidden": 1,
    "label": "Notizen"
   },
   {
@@ -154,6 +155,7 @@
    "fetch_if_empty": 1,
    "fieldname": "notizen",
    "fieldtype": "Long Text",
+   "hidden": 1,
    "label": "Notizen"
   },
   {
@@ -187,6 +189,7 @@
    "default": "Mittel",
    "fieldname": "prio",
    "fieldtype": "Select",
+   "hidden": 1,
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Priorit\u00e4t",
@@ -225,7 +228,7 @@
    "options": "Opportunity"
   }
  ],
- "modified": "2020-05-29 14:25:48.794800",
+ "modified": "2021-09-02 19:14:19.453100",
  "modified_by": "Administrator",
  "module": "Cobinet",
  "name": "Aktivitaet",

@@ -1,4 +1,4 @@
-# Copyright (c) 2020, libracore and contributors
+# Copyright (c) 2020-2021, libracore and contributors
 # For license information, please see license.txt
 
 from __future__ import unicode_literals
@@ -17,7 +17,7 @@ def get_columns():
     return [
         {"label": _("Aktivität"), "fieldname": "activity", "fieldtype": "Link", "options": "Aktivitaet", "width": 40},
         {"label": _("Verantwortlich"), "fieldname": "verantwortlich", "fieldtype": "Link", "options": "User", "width": 40},
-        {"label": _("Prio"), "fieldname": "prio", "fieldtype": "Select", "width": 50},
+        #{"label": _("Prio"), "fieldname": "prio", "fieldtype": "Select", "width": 50},
         {"label": _("Customer"), "fieldname": "customer", "fieldtype": "Link", "options": "Customer", "width": 80},
         {"label": _("Kundenname"), "fieldname": "customer_name", "fieldtype": "Data",  "width": 100},
         {"label": _("Allg. Tel."), "fieldname": "tel", "fieldtype": "Data",  "width": 120},
