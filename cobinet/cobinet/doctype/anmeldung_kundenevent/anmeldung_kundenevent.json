@@ -1,0 +1,119 @@
+{
+ "creation": "2021-09-02 19:12:53.460556",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "vorname",
+  "nachname",
+  "column_main",
+  "firma",
+  "email",
+  "section_teilnahme",
+  "event",
+  "column_teilnahem",
+  "teilnahme_event",
+  "teilnahme_rudgang",
+  "ganzer_name"
+ ],
+ "fields": [
+  {
+   "fieldname": "vorname",
+   "fieldtype": "Data",
+   "label": "Vorname",
+   "reqd": 1
+  },
+  {
+   "fieldname": "nachname",
+   "fieldtype": "Data",
+   "label": "Nachname",
+   "reqd": 1
+  },
+  {
+   "fieldname": "firma",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Firma"
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "E-Mail-Adresse",
+   "reqd": 1
+  },
+  {
+   "default": "1",
+   "fieldname": "teilnahme_event",
+   "fieldtype": "Check",
+   "label": "Teilnahme am Kundenevent"
+  },
+  {
+   "default": "1",
+   "fieldname": "teilnahme_rudgang",
+   "fieldtype": "Check",
+   "label": "Teilnahme an der F\u00fchrung durch das Begrwerk"
+  },
+  {
+   "fieldname": "column_main",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_teilnahme",
+   "fieldtype": "Section Break",
+   "label": "Teilnahme"
+  },
+  {
+   "default": "2021",
+   "fieldname": "event",
+   "fieldtype": "Data",
+   "label": "Event"
+  },
+  {
+   "fieldname": "column_teilnahem",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "ganzer_name",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "in_list_view": 1,
+   "label": "Ganzer Name"
+  }
+ ],
+ "modified": "2021-09-02 19:34:06.149223",
+ "modified_by": "Administrator",
+ "module": "Cobinet",
+ "name": "Anmeldung Kundenevent",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Sales Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "ganzer_name",
+ "track_changes": 1
+}
