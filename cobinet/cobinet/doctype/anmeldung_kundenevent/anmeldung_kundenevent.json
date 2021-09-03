@@ -49,7 +49,7 @@
    "label": "Teilnahme am Kundenevent"
   },
   {
-   "default": "1",
+   "default": "0",
    "fieldname": "teilnahme_rudgang",
    "fieldtype": "Check",
    "label": "Teilnahme an der F\u00fchrung durch das Begrwerk"
@@ -81,7 +81,7 @@
    "label": "Ganzer Name"
   }
  ],
- "modified": "2021-09-02 19:34:06.149223",
+ "modified": "2021-09-03 11:33:51.383675",
  "modified_by": "Administrator",
  "module": "Cobinet",
  "name": "Anmeldung Kundenevent",

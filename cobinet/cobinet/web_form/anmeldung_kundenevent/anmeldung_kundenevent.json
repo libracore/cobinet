@@ -19,7 +19,7 @@
  "is_standard": 1,
  "login_required": 0,
  "max_attachment_size": 0,
- "modified": "2021-09-02 20:15:29.389240",
+ "modified": "2021-09-03 11:34:16.481543",
  "modified_by": "Administrator",
  "module": "Cobinet",
  "name": "anmeldung-kundenevent",
@@ -111,7 +111,7 @@
   },
   {
    "allow_read_on_all_link_options": 0,
-   "default": "1",
+   "default": "0",
    "fieldname": "teilnahme_rudgang",
    "fieldtype": "Check",
    "hidden": 0,
