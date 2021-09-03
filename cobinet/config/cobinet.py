@@ -141,6 +141,12 @@ def get_data():
                        "name": "Website Settings",
                        "label": _("Website Settings"),
                        "description": _("Website Settings")
+                   },
+                   {
+                       "type": "doctype",
+                       "name": "Anmeldung Kundenevent",
+                       "label": _("Anmeldung Kundenevent"),
+                       "description": _("Anmeldung Kundenevent")
                    }
             ]
         },
