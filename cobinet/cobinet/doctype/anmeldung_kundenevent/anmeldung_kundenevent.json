@@ -11,9 +11,9 @@
   "email",
   "section_teilnahme",
   "event",
-  "column_teilnahem",
+  "column_teilnahme",
   "teilnahme_event",
-  "teilnahme_rudgang",
+  "teilnahme_rundgang",
   "ganzer_name"
  ],
  "fields": [
@@ -49,12 +49,6 @@
    "label": "Teilnahme am Kundenevent"
   },
   {
-   "default": "0",
-   "fieldname": "teilnahme_rudgang",
-   "fieldtype": "Check",
-   "label": "Teilnahme an der F\u00fchrung durch das Begrwerk"
-  },
-  {
    "fieldname": "column_main",
    "fieldtype": "Column Break"
   },
@@ -70,18 +64,24 @@
    "label": "Event"
   },
   {
-   "fieldname": "column_teilnahem",
-   "fieldtype": "Column Break"
-  },
-  {
    "fieldname": "ganzer_name",
    "fieldtype": "Data",
    "hidden": 1,
    "in_list_view": 1,
    "label": "Ganzer Name"
+  },
+  {
+   "default": "0",
+   "fieldname": "teilnahme_rundgang",
+   "fieldtype": "Check",
+   "label": "Teilnahme an der F\u00fchrung durch das Bergwerk"
+  },
+  {
+   "fieldname": "column_teilnahme",
+   "fieldtype": "Column Break"
   }
  ],
- "modified": "2021-09-03 11:33:51.383675",
+ "modified": "2021-10-04 16:27:30.177267",
  "modified_by": "Administrator",
  "module": "Cobinet",
  "name": "Anmeldung Kundenevent",

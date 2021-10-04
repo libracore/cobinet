@@ -9,7 +9,7 @@
  "amount": 0.0,
  "amount_based_on_field": 0,
  "button_label": "Save",
- "client_script": "$( document ).ready(function() {\n    $( \".container\" ).css( \"padding\", \"50px\" );\n    console.log(\"done\");\n    var buttons = document.getElementsByClassName(\"btn-primary\");\n    console.log(buttons);\n    for (var i = 0; i < buttons.length; i++)  {\n        buttons[i].innerHTML = \"Speichern\";\n    }\n});",
+ "client_script": "$( document ).ready(function() {\n    $( \".container\" ).css( \"padding\", \"50px\" );\n    console.log(\"done\");\n    var buttons = document.getElementsByClassName(\"btn-primary\");\n    console.log(buttons);\n    for (var i = 0; i < buttons.length; i++)  {\n        buttons[i].innerHTML = \"Speichern\";\n    }\n    \n    // hack to have default unchecked\n    var checked = $('[data-fieldname=\"teilnahme_rundgang\"]').find('input');\n    checked.prop(\"checked\", false);\n});",
  "creation": "2021-09-02 19:33:10.997375",
  "currency": "CHF",
  "doc_type": "Anmeldung Kundenevent",
@@ -19,7 +19,7 @@
  "is_standard": 1,
  "login_required": 0,
  "max_attachment_size": 0,
- "modified": "2021-09-03 11:34:16.481543",
+ "modified": "2021-10-04 17:15:04.778969",
  "modified_by": "Administrator",
  "module": "Cobinet",
  "name": "anmeldung-kundenevent",
@@ -80,20 +80,7 @@
    "max_length": 0,
    "max_value": 0,
    "read_only": 0,
-   "reqd": 0,
-   "show_in_filter": 0
-  },
-  {
-   "allow_read_on_all_link_options": 0,
-   "default": "2021",
-   "fieldname": "event",
-   "fieldtype": "Data",
-   "hidden": 1,
-   "label": "Event",
-   "max_length": 0,
-   "max_value": 0,
-   "read_only": 0,
-   "reqd": 0,
+   "reqd": 1,
    "show_in_filter": 0
   },
   {
@@ -112,7 +99,7 @@
   {
    "allow_read_on_all_link_options": 0,
    "default": "0",
-   "fieldname": "teilnahme_rudgang",
+   "fieldname": "teilnahme_rundgang",
    "fieldtype": "Check",
    "hidden": 0,
    "label": "Teilnahme an der F\u00fchrung durch das Bergwerk",
