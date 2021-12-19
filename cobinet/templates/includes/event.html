@@ -1,0 +1,24 @@
+<div class="row">
+{% for e in events %}
+    <div class="col-sm-6">
+        <table style="width: 100%; ">
+            <tr>
+                <td><i class="fa fa-calendar" style="font-size: 48px; "></i></td>
+                <td>
+                    <b>{{ e.title }}</b><br>
+                    {% if e.date %}am {{ frappe.utils.get_datetime(e.date).strftime('%d.%m.%Y') }}{% endif %}
+                    {% if e.time %} um {{ e.time }}{% endif %} 
+                    {% if e.location %}in {{ e.location }}{% endif %}<br>
+                    {{ e.description or "" }}
+                    {% if e.with_subscription %}
+                        <a href="/anmeldung-kundenevent?event={{ e.name }}">Zur Anmeldung</a><br>
+                    {% endif %}
+                    {% if e.attachment %}
+                        <a href="{{ e.attachment }}" target="_blank">Mehr Details</a><br>
+                    {% endif %}
+                </td>
+            </tr>
+        </table>
+    </div>
+{% endfor %}
+</div>

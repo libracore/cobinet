@@ -58,10 +58,10 @@
    "label": "Teilnahme"
   },
   {
-   "default": "2021",
    "fieldname": "event",
-   "fieldtype": "Data",
-   "label": "Event"
+   "fieldtype": "Link",
+   "label": "Event",
+   "options": "Anlass"
   },
   {
    "fieldname": "ganzer_name",
@@ -81,7 +81,7 @@
    "fieldtype": "Column Break"
   }
  ],
- "modified": "2021-10-04 16:27:30.177267",
+ "modified": "2021-12-19 16:03:46.746460",
  "modified_by": "Administrator",
  "module": "Cobinet",
  "name": "Anmeldung Kundenevent",

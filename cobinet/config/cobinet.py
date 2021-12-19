@@ -144,8 +144,14 @@ def get_data():
                    },
                    {
                        "type": "doctype",
+                       "name": "Anlass",
+                       "label": _("Anlässe"),
+                       "description": _("Anlässe")
+                   },
+                   {
+                       "type": "doctype",
                        "name": "Anmeldung Kundenevent",
-                       "label": _("Anmeldung Kundenevent"),
+                       "label": _("Anmeldungen"),
                        "description": _("Anmeldung Kundenevent")
                    }
             ]
