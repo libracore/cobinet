@@ -12,7 +12,7 @@
                 <td>
                     {% if e.date %}am {{ frappe.utils.get_datetime(e.date).strftime('%d.%m.%Y') }}{% endif %}
                     {% if e.time %} um {{ e.time }}{% endif %} 
-                    {% if e.location %}<br>in {{ e.location }}{% endif %}
+                    {% if e.location %}<br>{{ e.location }}{% endif %}
                 </td>
                 <td>
                     <b>{{ e.title }}</b><br>

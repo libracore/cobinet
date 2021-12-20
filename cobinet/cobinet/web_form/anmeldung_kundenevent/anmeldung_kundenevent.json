@@ -19,7 +19,7 @@
  "is_standard": 1,
  "login_required": 0,
  "max_attachment_size": 0,
- "modified": "2021-12-19 17:30:20.935664",
+ "modified": "2021-12-20 19:49:26.749017",
  "modified_by": "Administrator",
  "module": "Cobinet",
  "name": "anmeldung-kundenevent",
@@ -33,7 +33,7 @@
  "show_sidebar": 0,
  "sidebar_items": [],
  "success_url": "/anmeldung-kundenevent",
- "title": "Anmeldung Kundenevent",
+ "title": "Anmeldung",
  "web_form_fields": [
   {
    "allow_read_on_all_link_options": 0,
@@ -88,7 +88,7 @@
    "default": "1",
    "fieldname": "teilnahme_event",
    "fieldtype": "Check",
-   "hidden": 0,
+   "hidden": 1,
    "label": "Teilnahme am Kundenevent",
    "max_length": 0,
    "max_value": 0,

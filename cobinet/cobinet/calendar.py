@@ -61,6 +61,7 @@ def create_event(event):
     event.add('dtend', to_date)
     event.add('dtstamp', anlass.modified)
     event.add('description', (anlass.description or ""))
+    event.add('location', (anlass.location or ""))
     # add to calendar
     cal.add_component(event)
     
