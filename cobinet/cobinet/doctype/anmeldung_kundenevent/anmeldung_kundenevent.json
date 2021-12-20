@@ -33,6 +33,7 @@
    "fieldname": "firma",
    "fieldtype": "Data",
    "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Firma"
   },
   {
@@ -46,6 +47,7 @@
    "default": "1",
    "fieldname": "teilnahme_event",
    "fieldtype": "Check",
+   "hidden": 1,
    "label": "Teilnahme am Kundenevent"
   },
   {
@@ -60,6 +62,8 @@
   {
    "fieldname": "event",
    "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Event",
    "options": "Anlass"
   },
@@ -68,12 +72,14 @@
    "fieldtype": "Data",
    "hidden": 1,
    "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Ganzer Name"
   },
   {
    "default": "0",
    "fieldname": "teilnahme_rundgang",
    "fieldtype": "Check",
+   "hidden": 1,
    "label": "Teilnahme an der F\u00fchrung durch das Bergwerk"
   },
   {
@@ -81,7 +87,7 @@
    "fieldtype": "Column Break"
   }
  ],
- "modified": "2021-12-19 16:03:46.746460",
+ "modified": "2021-12-20 12:54:20.134802",
  "modified_by": "Administrator",
  "module": "Cobinet",
  "name": "Anmeldung Kundenevent",
