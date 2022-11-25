@@ -8,6 +8,7 @@
   "active",
   "column_main",
   "with_subscription",
+  "simple_subscription",
   "section_details",
   "title",
   "location",
@@ -76,9 +77,15 @@
    "fieldname": "section_description",
    "fieldtype": "Section Break",
    "label": "Description"
+  },
+  {
+   "default": "0",
+   "fieldname": "simple_subscription",
+   "fieldtype": "Check",
+   "label": "Einfache Anmeldung"
   }
  ],
- "modified": "2021-12-19 16:11:01.427198",
+ "modified": "2022-11-25 12:03:56.233677",
  "modified_by": "Administrator",
  "module": "Cobinet",
  "name": "Anlass",

@@ -19,6 +19,7 @@ def get_events():
         SELECT 
             `name`, 
             `with_subscription`, 
+            `simple_subscription`,
             `title`, 
             `location`, 
             `date`, 

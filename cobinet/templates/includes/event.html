@@ -20,7 +20,7 @@
                 </td>
                 <td>
                     {% if e.with_subscription %}
-                        <a href="/anmeldung-kundenevent?event={{ e.name }}"><i class="fa fa-edit" style="font-size: 12px; "></i> Zur Anmeldung</a><br>
+                        <a href="/anmeldung-{% if e.simple_subscription %}einfach{% else %}kundenevent{% endif %}?event={{ e.name }}"><i class="fa fa-edit" style="font-size: 12px; "></i> Zur Anmeldung</a><br>
                     {% endif %}
                     {% if e.attachment %}
                         <a href="{{ e.attachment }}" target="_blank"><i class="fa fa-file" style="font-size: 12px; "></i> Mehr Details</a><br>
