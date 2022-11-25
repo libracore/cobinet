@@ -47,7 +47,6 @@
    "default": "1",
    "fieldname": "teilnahme_event",
    "fieldtype": "Check",
-   "hidden": 1,
    "label": "Teilnahme am Kundenevent"
   },
   {
@@ -79,7 +78,6 @@
    "default": "0",
    "fieldname": "teilnahme_rundgang",
    "fieldtype": "Check",
-   "hidden": 1,
    "label": "Teilnahme an der F\u00fchrung durch das Bergwerk"
   },
   {
@@ -87,7 +85,7 @@
    "fieldtype": "Column Break"
   }
  ],
- "modified": "2021-12-20 13:26:59.041556",
+ "modified": "2022-11-25 11:48:06.737884",
  "modified_by": "Administrator",
  "module": "Cobinet",
  "name": "Anmeldung Kundenevent",
