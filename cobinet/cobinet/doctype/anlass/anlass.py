@@ -31,7 +31,7 @@ def get_events():
              LIMIT 1) AS `attachment`
         FROM `tabAnlass`
         WHERE `active` = 1
-        ORDER BY `date` DESC;
+        ORDER BY `date` ASC;
         """, as_dict=True)
         
     data = {
