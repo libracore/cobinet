@@ -19,7 +19,7 @@
  "is_standard": 1,
  "login_required": 0,
  "max_attachment_size": 0,
- "modified": "2022-11-25 11:54:07.090044",
+ "modified": "2023-08-19 08:21:07.090044",
  "modified_by": "Administrator",
  "module": "Cobinet",
  "name": "anmeldung",
@@ -32,7 +32,7 @@
  "show_in_grid": 0,
  "show_sidebar": 0,
  "sidebar_items": [],
- "success_url": "/anmeldung",
+ "success_url": "/unternehmen#events",
  "title": "Anmeldung",
  "web_form_fields": [
   {
