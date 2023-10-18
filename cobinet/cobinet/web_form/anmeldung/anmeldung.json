@@ -32,7 +32,7 @@
  "show_in_grid": 0,
  "show_sidebar": 0,
  "sidebar_items": [],
- "success_message": "Vielen Dank für Ihre Anmeldung!" 
+ "success_message": "Vielen Dank für Ihre Anmeldung!",
  "success_url": "/unternehmen",
  "title": "Anmeldung",
  "web_form_fields": [
